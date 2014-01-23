@@ -1,0 +1,93 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="zh-CN" xml:lang="zh-CN">
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+    <title>Shops</title>
+    <link type="text/css" rel="stylesheet" href="base.css"/>
+    <script type="text/javascript" src="tMobile.js"></script>
+    <script type="text/javascript" src="config.js"></script>
+    <script type="text/javascript" src="bridge.js"></script>
+    <style type="text/css">
+        .main {
+            padding: 20px 10px;
+        }
+
+        .shop {
+            -webkit-border-radius: 8px;
+            border: 2px solid #fff;
+            background-color: #fff;
+            font-size: 14px;
+            margin-top: 10px;
+        }
+
+        .shop .name {
+            height: 35px;
+            line-height: 35px;
+            padding: 0 5px;
+        }
+
+        .shop .name .shopName {
+            float: left;
+        }
+
+        .shop .name .viewMap {
+            float: right;
+            text-align: center;
+            height: 25px;
+            line-height: 25px;
+            margin: 3px 0;
+        }
+
+        .shop p {
+            margin: 5px;
+        }
+
+    </style>
+    <script type="text/html" id="shop_tpl">
+        <div class="shop">
+            <div class="bar name">
+                <span class="shopName"><[=name]></span>
+
+                <[if (latitude) {]>
+                <div class="button viewMap">查看地图</div>
+                <[}]>
+            </div>
+            <[if (address){]>
+            <p>地址:<[=address]></p>
+            <[}]>
+            <[if(tel){]>
+            <p>电话:<[=tel]></p>
+            <[}]>
+        </div>
+    </script>
+    <script type="text/javascript">
+        $.pageLoaded(function() {
+            var shops = $.getContextDataObj("shops");
+
+            $(".scroller").tmpl({
+                str: "shop_tpl",
+                data: shops,
+                rendered: function(dom, context) {
+                    var _shop = context.data;
+
+                    dom.filter("div").find(".viewMap").on("click", function(e) {
+                        $.viewMap(_shop);
+                    });
+                }
+            }).scroller();
+        });
+    </script>
+
+</head>
+<body>
+<div class="viewport">
+    <div class="scroll_wrapper">
+        <div class="scroller main">
+
+        </div>
+    </div>
+</div>
+</body>
+</html>

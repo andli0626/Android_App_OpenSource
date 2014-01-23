@@ -1,0 +1,155 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="zh-CN" xml:lang="zh-CN">
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+    <title>Options</title>
+    <link type="text/css" rel="stylesheet" href="base.css"/>
+    <script type="text/javascript" src="tMobile.js"></script>
+    <script type="text/javascript" src="config.js"></script>
+    <script type="text/javascript" src="bridge.js"></script>
+    <style type="text/css">
+
+        .main {
+            padding: 20px 10px;
+        }
+
+        .content1 {
+            padding-bottom: 3px;
+        }
+
+        .item {
+            height: 60px;
+            line-height: 60px;
+            padding: 0 10px;
+            background-image: -webkit-gradient(linear, left bottom, left top, color-stop(0, #dcdcdc), color-stop(1, #f0f0f0));
+            border-bottom: 1px solid #aaa;
+            font-size: 16px;
+            font-weight: bold;
+        }
+        .about {
+            border-bottom: none;
+        }
+
+        .mode {
+            position: relative;
+            -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
+        }
+
+        .mode span {
+            float: left;
+        }
+
+        .checkbox {
+            background-position: -160px 0;
+            width: 20px;
+            height: 20px;
+            position: absolute;
+            right: 50px;
+            top: 20px;
+        }
+        .checkbox.checked {
+            background-position: -190px 0;
+        }
+
+        .item:hover {
+            background-image: -webkit-gradient(linear, 0 100%, 0 0, color-stop(0, #39b5be), color-stop(1, #4fcbd4));
+        }
+    </style>
+    <script type="text/javascript">
+        function initLoginDiv() {
+            // 首先清除事件绑定
+            $(".login").un("click");
+            
+            //检查是否登录
+            if ($.isLogin()) {
+                $(".login").html("退出登录").on("click", function() {
+                    $.logout(function(ret) {
+                        if (ret == "0") {
+                            $.alert("成功退出登录");
+                            initLoginDiv();
+                        }
+                    });
+                });
+            } else {
+                $(".login").html("登录").on("click", function() {
+                    $.openUrl("login.html", {ui_title: "登录"});
+                });
+            }
+        }
+        
+        //页面加载过程
+        $.pageLoaded(function() {
+        	//登录初始化
+            initLoginDiv();
+
+            // mode
+            var db;
+            //打开数据库
+            $.openDatabase(function(database) {
+                db = database;
+                db.getPreference("text_mode", function(val) {
+                    if (val == "1") {
+                        $(".mode .checkbox").addClass("checked");
+                    } else {
+                        $(".mode .checkbox").removeClass("checked");
+                    }
+                });
+            });
+            
+            //模式点击事件
+            $(".mode").on("click", function() {
+                var cb = $(this).find(".checkbox");
+                if (cb.hasClass("checked")) {
+                    cb.removeClass("checked");
+                    db.savePreference("text_mode", "0");
+                } else {
+                    cb.addClass("checked");
+                    db.savePreference("text_mode", "1");
+                }
+            });
+
+            //选择城市
+            $(".switch").on("click", function() {
+                $.openUrl("citylist.html", {
+                    ui_title: "选择城市"
+                });
+            });
+
+            //关于我们
+            $(".about").on("click", function() {
+                $.openUrl("about.html", {
+                    ui_title: "关于我们"
+                });
+            })
+        });
+        $.pageBack(function(args) {
+            if (args && args["login"] == "success") {
+                initLoginDiv();
+            }
+        });
+
+        $.pageResume(function() {
+            initLoginDiv();
+        });
+    </script>
+</head>
+<body>
+<div class="viewport">
+    <div class="scroll_wrapper">
+        <div class="scroller main">
+            <div class="content1">
+                <div class="item login">登录</div>
+                <div class="item mode">
+                    <span>文字模式</span>
+                    <div class="p_icon checkbox checked"></div>
+                </div>
+                <div class="item switch">切换城市</div>
+                <div class="item about">关于我们</div>
+            </div>
+        </div>
+    </div>
+</div>
+</body>
+</html>

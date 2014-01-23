@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8"?>
+	<!-- 系统设置界面 -->
+<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android">
+
+	<PreferenceCategory android:title="常用设置"
+		android:summary="Application settings">
+		<!-- 编辑框 -->
+		<EditTextPreference 
+		    android:key="user_name"
+			android:defaultValue="@null" 
+			android:title="用户名" 
+			android:summary="请设置您的个人用户名" />
+		<ListPreference 
+			android:key="download_format"
+			android:title="下载格式" 
+			android:summary="请设置音频下载格式" 
+			android:entries="@array/audio_format"
+			android:entryValues="@array/audio_format_values" />
+			
+		<CheckBoxPreference 
+			android:key="wifi_only"
+			android:defaultValue="false" 
+			android:title="WIFI设置" 
+			android:summary="只有WIFI模式下才联网" />
+		<CheckBoxPreference 
+			android:key="roaming_protection"
+			android:defaultValue="true" 
+			android:title="Roaming Protection"
+			android:summary="Disable listening abroad" />
+
+	</PreferenceCategory>
+
+	<PreferenceCategory android:title="其他设置"
+		android:summary="Interaction with outside applications">
+
+		<CheckBoxPreference android:key="lastfm_scrobble"
+			android:defaultValue="false" 
+			android:title="Last.fm Scrobbling"
+			android:summary="Requires official last.fm client" />
+
+	</PreferenceCategory>
+</PreferenceScreen>

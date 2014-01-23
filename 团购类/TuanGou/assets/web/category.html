@@ -1,0 +1,268 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="zh-CN" xml:lang="zh-CN">
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+    <title>Category</title>
+    <link type="text/css" rel="stylesheet" href="base.css"/>
+    <script type="text/javascript" src="tMobile.js"></script>
+    <script type="text/javascript" src="config.js"></script>
+    <script type="text/javascript" src="bridge.js"></script>
+    <style type="text/css">
+
+        .main {
+            padding: 20px 10px;
+        }
+
+        #header {
+            height: 45px;
+            border-bottom: 1px solid #aaa;
+            padding: 16px 5px 8px 5px;
+        }
+
+        #locality {
+            float: left;
+            height: 34px;
+            width: 100px;
+        }
+
+        #locality #city {
+            line-height: 34px;
+            font-size:16px;
+        }
+
+        .search_box {
+            margin-left: 105px;
+            padding: 2px 0 2px 8px;
+        }
+
+        .search_box .input_container {
+            margin-right: 30px;
+            position: relative;
+        }
+
+        input.search {
+            height: 30px;
+            width: 100%;
+            border: none;
+            font-size: 16px;
+            -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
+        }
+
+        .search_box .s_icon {
+            background-position: 0 0;
+            position: absolute;
+            top: 0;
+            right: 0;
+            height: 30px;
+            margin: 2px 3px 2px 5px;
+            width: 30px;
+        }
+
+        .category {
+            position: relative;
+            height: 46px;
+            width: 100%;
+            background-image: -webkit-gradient(linear, left bottom, left top, color-stop(0, #dcdcdc), color-stop(1, #f0f0f0));
+            border-bottom: 1px solid #aaa;
+        }
+
+        .category .c_icon {
+            float: left;
+            background-position: 0 -30px;
+            height: 40px;
+            width: 40px;
+            margin: 3px 5px 3px 10px;
+        }
+        .category .name {
+            float: left;
+            margin-right: 10px;
+            line-height: 46px;
+            font-size: 20px;
+            font-weight: bold;
+        }
+
+        .category .total {
+            float: left;
+            line-height: 46px;
+            color: #888;
+        }
+
+        .category .arrow {
+            float: right;
+            background-position: -30px 0;
+            height: 30px;
+            width: 30px;
+            margin: 8px 10px 8px 0;
+        }
+    </style>
+    <script type="text/html" id="category_tpl">
+        <div class="category">
+            <a class="link" href="deallist.html">
+                <div class="p_icon c_icon" style="background-position: -<[=id == 22 ? 240 : 40 * (id - 1)]>px -30px;"></div>
+                <div class="name"><[=name]></div>
+                <div class="total"><[=total]></div>
+                <div class="p_icon arrow"></div>
+            </a>
+        </div>
+    </script>
+    
+    <script type="text/javascript">
+    //加载分类函数
+        function loadCategory(city) {
+			$.print("loadCategory");
+			//打开等待界面
+        	var waiting = $.openWaiting();
+			
+			//发起http请求
+            $.ajax({
+                 url: "http://api.tuan800.com/mobile_api/android/get_categories?cityId=" + (city.id || 1),
+                 dbLife: 18000,  // use db
+                 
+                 //成功的方法--_on_ajax_finished结束方法中会调用
+                 success: function(data) {
+                	 $.print("get url success");
+                	 //取消进度条
+                     waiting.hide();
+                	 //获取分类
+                     var cats = data.categories;
+                	 
+                     if (cats) {
+                         $("#container").tmpl({
+                             tplContainerId: "category_tpl",
+                             data: cats,
+                             rendering: function(context) {
+                                 var idx = context.index,
+                                         data = context.data;
+                                 data.isLast = (idx == cats.length - 1);
+                             },
+                             rendered: function(dom, context) {
+                                 try {
+                                     var cat = context.data;
+                                     
+                                     //分类点击事件监听器--打开子分类
+                                     dom.filter("div").on("click", function(e) {
+                                         e.preventDefault();
+                                         
+                                         //打开子分类
+                                         $.openUrl("deallist.html?categoryId=" + cat.id, {
+                                             ui_title: city.name + " - " + cat.name
+                                         });
+                                     });
+                                 } catch (err) {
+                                     $.log(err, "e");
+                                 }
+                             }
+                         });
+                     }
+                 },
+                 error: function(err) {
+                     waiting.hide();
+                     $.alert(err);
+                 }
+             });
+        }
+    
+        function search() {
+            var keyword = $(".search_box input").val().trim();
+            if (keyword != "") {
+                $.openUrl("deallist.html?keyword=" + keyword, {ui_title: keyword + "的搜索结果"});
+            }
+        }
+        var curCityId = -1;
+        
+        //页面加载函数
+        $.pageLoaded(function() {
+        	$.print("pageLoaded");
+        	
+        	//检查网络状态
+            if (!$.getNetworkState()) {
+            	//对话框提示
+                $.alert("网络连接失败，请检查网络连接");
+                return;
+            }
+            
+            $(".scroller").scroller();
+            
+            //获取当前城市
+            $.getCity(function(city) {
+                //设置当前的显示的city
+            	$("#city").html(city.name);
+              	//保存当前city的id
+                curCityId = city.id;
+                //加载分类函数
+              	loadCategory(city);
+            });
+            
+            // search input 输入搜索
+            $(".search_box input").on("keyup", function(e) {
+                if (e.keyCode == 13) {
+                    search();
+                }
+            });
+            
+            //点击搜索
+            $(".search_box .p_icon").on("click", function() {
+                search();
+            });
+            
+            // change city点击选择城市
+            $("#locality").on("click", function() {
+                $.openUrl("citylist.html", {
+                    ui_title: "选择城市"
+                });
+            });
+        });
+        
+        $.pageBack(function(args) {
+        	$.print("pageBack");
+            if (args && args["city"] != null) {
+                var city = args["city"];
+                if (city.id != curCityId) {
+                    $("#city").html(city.name);
+                   //保存当前city的id
+                    curCityId = city.id;
+                   //加载分类函数
+                    loadCategory(city);
+                }
+            }
+        });
+        $.pageResume(function(args) {
+        	$.print("pageResume");
+            $.getCity(function(city) {
+                if (city.id != curCityId) {
+                    $("#city").html(city.name);
+                    curCityId = city.id;
+                    loadCategory(city);
+                }
+            });
+        });
+
+    </script>
+</head>
+<body>
+    <div class="viewport">
+        <div class="scroll_wrapper">
+            <div class="scroller main">
+                <div class="content1">
+                    <div id="header">
+                        <div id="locality" class="filter_box">
+                            <span id="city"></span>
+                            <div class="p_icon drop"></div>
+                        </div>
+                        <div class="search_box filter_box">
+                            <div class="input_container">
+                                <input class="search" type="text" placeholder="搜索团购"/>
+                            </div>
+                            <div class="p_icon s_icon"></div>
+                        </div>
+                    </div>
+                    <div id="container">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

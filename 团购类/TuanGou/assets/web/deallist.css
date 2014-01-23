@@ -1,0 +1,58 @@
+.deal {
+    position:relative;
+    height: 85px;
+    background-image: -webkit-gradient(linear, left bottom, left top, color-stop(0, #dcdcdc), color-stop(1, #f0f0f0));
+    border-bottom: 1px solid #aaa;
+    padding: 5px 3px;
+}
+
+.deal .site {
+    float: left;
+    max-width: 102px;
+    height: 100%;
+    margin-right: 10px;
+    text-align: center;
+    overflow: hidden;
+    color: #007c85;
+    text-overflow: ellipsis;
+}
+
+.deal .site .name {
+    height: 34px;
+    font-weight: bold;
+    font-size: 14px;
+    white-space: nowrap;
+}
+
+.deal .site img {
+    height: 60px;
+    width: 100px;
+    margin-top: 3px;
+    border: 2px solid #fff;
+}
+
+.deal .content {
+    position: relative;
+    overflow-y: hidden;
+}
+
+.deal .content .desc {
+    float: left;
+    width: 100%;
+    height: 60px;
+    line-height: 20px;
+    overflow-y: hidden;
+    margin-bottom: 5px;
+}
+
+.deal .content .price {
+    color: red;
+    font-size: 14px;
+    font-weight: bold;
+    margin-right: 10px;
+}
+
+.deal .content .area {
+    float: right;
+    color: #888;
+}

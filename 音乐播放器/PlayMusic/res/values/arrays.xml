@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+	<string-array name="search_modes">
+		<!-- <item>Album</item>  -->
+		<item>Artist</item>
+		<item>Tag</item>
+		<item>User Playlists</item>
+		<item>User Starred Albums</item>
+	</string-array>
+
+	<string-array name="radio_modes">
+		<item>Recent</item>
+		<item>Recommended</item>
+	</string-array>
+
+	<string-array name="download_modes">
+		<item>All</item>
+		<item>Complete</item>
+		<item>Queue</item>
+	</string-array>
+
+	<string-array name="audio_format">
+		<item>MP3</item>
+		<item>OGG</item>
+	</string-array>
+
+	<string-array name="audio_format_values">
+		<item>mp31</item>
+		<item>ogg2</item>
+	</string-array>
+
+</resources>

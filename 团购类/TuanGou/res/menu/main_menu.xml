@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu
+  xmlns:android="http://schemas.android.com/apk/res/android">
+    <item android:icon="@drawable/menu_switch_city" android:id="@id/menuSwitchCity" android:title="@string/switch_city_title" />
+    <item android:icon="@drawable/menu_login" android:id="@id/menuLogin" android:title="@string/login_title" />
+    <item android:icon="@drawable/menu_about" android:id="@id/menuAbout" android:title="@string/about" />
+</menu>

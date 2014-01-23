@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:background="#FFF">    
+    
+    <RelativeLayout android:background="@drawable/search_title_bg" android:orientation="horizontal" android:paddingLeft="10dp" android:gravity="center" android:layout_height="46dp" android:layout_width="fill_parent">
+		<ImageView android:id="@+id/mysc_goback" android:scaleType="fitXY" android:src="@drawable/goback" android:layout_height="39dp" android:layout_width="39dp"/>
+		<TextView android:gravity="center" android:layout_centerInParent="true" android:textAppearance="?android:attr/textAppearanceMedium" android:layout_height="wrap_content" android:layout_width="fill_parent" android:text="商品收藏"/>
+    </RelativeLayout>
+    
+	<LinearLayout android:orientation="vertical" android:layout_height="fill_parent" android:layout_width="fill_parent" android:id="@+id/index_layout_center">
+		<ListView android:id="@+id/mysc_listview" android:fastScrollEnabled="true" android:scrollingCache="false" android:fadingEdge="none" android:divider="@drawable/list_driver" android:layout_width="fill_parent" android:layout_height="fill_parent"/>
+	</LinearLayout>
+</LinearLayout>
+
+    	

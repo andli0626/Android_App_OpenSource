@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android" android:fadeScrollbars="true" android:layout_width="fill_parent" android:layout_height="fill_parent" android:scrollbars="vertical"> 
+    <!-- 
+    <ScrollView android:orientation="vertical" android:measureAllChildren="true" android:fillViewport="true" android:layout_weight="1" android:layout_width="fill_parent" android:layout_height="fill_parent">
+ -->
+		<LinearLayout android:layout_width="fill_parent" android:orientation="vertical" android:layout_height="fill_parent">
+		 
+			<LinearLayout android:background="@drawable/detail_bg" android:orientation="vertical" android:gravity="center" android:layout_height="wrap_content" android:layout_width="fill_parent">
+				<LinearLayout android:background="@drawable/detail_pic_bg" android:gravity="center" android:layout_height="500dp" android:layout_width="500dp">
+					<com.yizhao.ui.DetialGallery android:id="@+id/detail_gallery" android:layout_height="wrap_content" android:layout_width="wrap_content"/>
+				</LinearLayout>
+			</LinearLayout>
+	    
+	    	<LinearLayout android:background="@drawable/detail_layout_shape" android:layout_margin="8dp" android:gravity="center" android:orientation="vertical" android:layout_height="wrap_content" android:layout_width="fill_parent">
+				<LinearLayout android:orientation="horizontal" android:layout_width="fill_parent" android:layout_height="wrap_content">
+				</LinearLayout>
+				<LinearLayout android:orientation="horizontal" android:layout_width="fill_parent" android:layout_height="wrap_content">
+					<TextView android:layout_height="wrap_content" android:gravity="left" android:text="最高价：" android:textAppearance="?android:attr/textAppearanceLarge" style="@style/theme_fontcolor_blake" android:layout_width="wrap_content"></TextView>
+					<TextView android:id="@+id/detail_highprice" style="@style/theme_fontcolor_red" android:text="查找中" android:textAppearance="?android:attr/textAppearanceLarge" android:gravity="left" android:layout_width="wrap_content" android:layout_height="wrap_content"/>
+				</LinearLayout>
+				<LinearLayout android:orientation="horizontal" android:layout_width="fill_parent" android:layout_height="wrap_content">
+					<TextView android:layout_height="wrap_content" android:gravity="left" android:text="最低价：" android:textAppearance="?android:attr/textAppearanceLarge" style="@style/theme_fontcolor_blake" android:layout_width="wrap_content"></TextView>
+					<TextView android:id="@+id/detail_lowprice" style="@style/theme_fontcolor_red" android:text="查找中" android:textAppearance="?android:attr/textAppearanceLarge" android:gravity="left" android:layout_width="wrap_content" android:layout_height="wrap_content"/>
+				</LinearLayout>
+				<LinearLayout android:orientation="horizontal" android:layout_width="fill_parent" android:layout_height="wrap_content">
+					<TextView android:id="@+id/detail_shops" android:gravity="left" style="@style/theme_fontcolor_red" android:layout_width="wrap_content" android:text="0家" android:textAppearance="?android:attr/textAppearanceLarge" android:layout_height="wrap_content"></TextView>
+					<TextView style="@style/theme_fontcolor_blake" android:gravity="left" android:layout_width="wrap_content" android:text="有售" android:textAppearance="?android:attr/textAppearanceLarge" android:layout_height="wrap_content"></TextView>
+					<TextView android:id="@+id/detail_receives" android:layout_marginLeft="10dp" android:layout_height="wrap_content" android:gravity="left" android:text="0人" android:textAppearance="?android:attr/textAppearanceLarge" style="@style/theme_fontcolor_red" android:layout_width="wrap_content"></TextView>
+					<TextView android:layout_height="wrap_content" android:gravity="left" android:text="发表评论" android:textAppearance="?android:attr/textAppearanceLarge" style="@style/theme_fontcolor_blake" android:layout_width="wrap_content"></TextView>
+				</LinearLayout>
+			</LinearLayout>
+			
+			<LinearLayout android:layout_width="fill_parent" android:background="@drawable/detail_title_bg" android:layout_height="wrap_content" android:paddingLeft="10dp" android:gravity="center">
+				<TextView style="@style/theme_fontcolor_blake" android:layout_height="wrap_content" android:text="商家报价" android:textAppearance="?android:attr/textAppearanceLarge" android:layout_width="fill_parent"></TextView>
+			</LinearLayout>
+			
+			<LinearLayout android:id="@+id/detail_shops_layout" android:orientation="vertical" android:layout_width="fill_parent" android:layout_height="wrap_content"/>
+			
+			<!-- 
+			<LinearLayout android:layout_width="fill_parent" android:layout_height="wrap_content" android:padding="5dp" android:gravity="center">
+				<LinearLayout android:background="@drawable/more_shops" android:gravity="center" android:layout_height="wrap_content" android:layout_width="wrap_content">
+					<TextView style="@style/theme_fontcolor_blake" android:layout_height="wrap_content" android:text="点击查看更多商家报价" android:layout_width="fill_parent"></TextView>
+				</LinearLayout>
+			</LinearLayout>
+			 -->
+			 
+			<LinearLayout android:layout_width="fill_parent" android:layout_height="wrap_content" android:padding="5dp" android:gravity="center">
+				<LinearLayout android:background="@drawable/bt_red" android:layout_marginRight="5dp" android:gravity="center" android:layout_height="67dp" android:layout_width="234dp">
+					<TextView android:id="@+id/detail_bt_fx" android:textAppearance="?android:attr/textAppearanceLarge" style="@style/theme_fontcolor_white" android:layout_height="wrap_content" android:text="分享" android:layout_width="wrap_content"></TextView>
+				</LinearLayout>
+				<LinearLayout android:background="@drawable/bt_red" android:layout_marginLeft="5dp" android:gravity="center" android:layout_height="67dp" android:layout_width="234dp">
+					<TextView android:id="@+id/detail_bt_sc" android:textAppearance="?android:attr/textAppearanceLarge" style="@style/theme_fontcolor_white" android:layout_height="wrap_content" android:text="收藏" android:layout_width="wrap_content"></TextView>
+				</LinearLayout>
+			</LinearLayout>
+	
+		</LinearLayout>
+ 	
+</ScrollView>
+	
+		
+
+    	

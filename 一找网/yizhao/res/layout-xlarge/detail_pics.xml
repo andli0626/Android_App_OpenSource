@@ -1,0 +1,4 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android" android:orientation="vertical" android:layout_height="wrap_content" android:layout_width="wrap_content">
+	<ImageView android:id="@+id/detailimage" android:scaleType="fitXY" android:adjustViewBounds="true" android:src="@drawable/yizhao" android:layout_height="380dp" android:layout_width="380dp"/>
+</RelativeLayout>

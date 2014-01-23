@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<config client-tag="android_web_v3"
+        client-version="3.2"
+        page-source="local"
+        debug="false">
+    <remote-prefix>http://www.tuan800.com/dl/mobile/</remote-prefix>
+    <remote-update-path>http://www.tuan800.com/dl/mobile/update/</remote-update-path>
+    <remote-version-url>http://www.tuan800.com/dl/mobile/update/android_version.xml</remote-version-url>
+    <!--<remote-prefix>http://192.168.1.85:9090/tuan-mobile/</remote-prefix>-->
+    <!--<remote-update-path>http://192.168.1.85:9090/tuan-mobile/update/</remote-update-path>-->
+    <!--<remote-version-url>http://192.168.1.85:9090/tuan-mobile/update/android_version.xml</remote-version-url>-->
+    <assets>
+        <asset path="web" type="folder" copy="true" config="WEB_FILE_FOLDER"/>
+        <asset path="update" type="folder" copy="true" config="UPDATE_FILE_FOLDER"/>
+    </assets>
+    <database name="android_source_tuangou.db"/>
+    <javascript-bridges>
+        <javascript-bridge name="daquan_js" class="android.source.tuangou.javascript.Bridge"/>
+    </javascript-bridges>
+</config>

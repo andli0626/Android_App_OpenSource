@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8"?>
+<merge xmlns:android="http://schemas.android.com/apk/res/android" >
+
+    <LinearLayout
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center_vertical"
+        android:minHeight="75dip"
+        android:orientation="horizontal"
+        android:paddingLeft="13dip"
+        android:paddingRight="13dip" >
+
+        <Button
+            android:id="@+id/RetryButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="重试" >
+        </Button>
+
+        <LinearLayout
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:paddingLeft="13dip" >
+
+            <TextView
+                android:id="@+id/ProgressTextView"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Loading..."
+                android:textColor="#ffffff"
+                android:textSize="20dip" >
+            </TextView>
+        </LinearLayout>
+    </LinearLayout>
+
+</merge>

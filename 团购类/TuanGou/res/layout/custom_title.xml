@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout android:gravity="center_vertical" android:orientation="horizontal" android:background="#3F7531" android:layout_width="fill_parent" android:layout_height="30.0dip"
+  xmlns:android="http://schemas.android.com/apk/res/android">
+    <ImageView android:id="@+id/download" android:visibility="invisible" 
+    	android:layout_width="wrap_content" android:layout_height="wrap_content"
+    	android:layout_marginLeft="5.0dip" android:src="@android:drawable/stat_sys_download" />
+    	
+    <TextView android:textColor="#ffffffff" android:id="@+id/tips" 
+    	android:layout_width="wrap_content" android:layout_height="wrap_content" 
+    	android:layout_marginLeft="5.0dip" android:text="" />
+    	
+    <ProgressBar android:id="@+id/progress_bar" android:visibility="invisible" 
+    	android:layout_width="150.0dip" android:layout_height="5.0dip"
+    	android:layout_marginLeft="10.0dip" style="?android:attr/progressBarStyleHorizontal" />
+    	
+    <TextView android:textColor="#ffffffff" android:id="@+id/rate" 
+    	android:layout_width="wrap_content" android:layout_height="wrap_content" 
+    	android:layout_marginLeft="5.0dip" android:text="" />
+</LinearLayout>

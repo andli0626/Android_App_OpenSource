@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:background="#000000"
+    android:orientation="vertical" >
+
+    <LinearLayout
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:background="@drawable/gradient_dark_purple"
+        android:gravity="center"
+        android:minHeight="75dip"
+        android:orientation="horizontal" >
+
+        <Spinner
+            android:id="@+id/SearchSpinner"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="10dip"
+            android:layout_weight="1" >
+        </Spinner>
+
+        <EditText
+            android:id="@+id/SearchEditText"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="5dip"
+            android:layout_marginRight="5dip"
+            android:layout_weight="1"
+            android:hint="请输入搜索字段..."
+            android:singleLine="true" >
+        </EditText>
+
+        <Button
+            android:id="@+id/SearchButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginRight="10dip"
+            android:text="搜索" >
+
+        </Button>
+    </LinearLayout>
+
+    <ViewFlipper
+        android:id="@+id/SearchViewFlipper"
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:layout_weight="1"
+        android:background="#fff" >
+
+        <ListView
+            android:id="@+id/SearchListView"
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent"
+            android:divider="#000" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:text="@string/no_results" >
+        </TextView>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:text="@string/search_list_hint" >
+        </TextView>
+    </ViewFlipper>
+
+</LinearLayout>

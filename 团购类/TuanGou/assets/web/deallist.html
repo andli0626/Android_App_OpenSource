@@ -1,0 +1,188 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="zh-CN" xml:lang="zh-CN">
+<head>
+    <meta name="viewport" content="width=device-width, height=device-height, initial-scale=1, maximum-scale=1">
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+    <title>Deal list</title>
+    <link type="text/css" rel="stylesheet" href="base.css"/>
+    <link type="text/css" rel="stylesheet" href="deallist.css"/>
+    <script type="text/javascript" src="tMobile.js"></script>
+    <script type="text/javascript" src="config.js"></script>
+    <script type="text/javascript" src="bridge.js"></script>
+    <script type="text/javascript" src="deallist.js"></script>
+    <style type="text/css">
+        .main {
+            padding: 50px 10px 10px 10px;
+        }
+        .bottom_nav_bar {
+            display: none;
+        }
+    </style>
+    <script type="text/javascript">
+       //根据city和关键字来搜索
+        function searchDeals(city, keyword) {
+//            $.setUITitle(keyword + " 搜索结果");
+			//获取查找的list
+            getDealList(function(pageset, page) {
+                return "http://api.tuan800.com/mobile_api/android/get_deals?cityId=" +
+                        city.id + "&q=" + keyword + "&order=" + order + "&pageset=" + pageset + "&page=" + page;
+            });
+        }
+        
+       //根据city和分类id来获取详情list
+        function getCategoryDealList(city, categoryId) {
+//            $.setUITitle(city.name + "团购");
+			//获取详情list
+            getDealList(function(pageset, page) {
+                return "http://api.tuan800.com/mobile_api/android/get_deals?pageset=" + pageset +
+                            "&page=" + page + "&cityId=" + city.id + "&order=" + order + "&categoryId=" + categoryId;
+            })
+        }
+        
+        function getDealList(urlGenerator) {
+        	
+            var pageset = 10, firstLoad = true,
+                loadingBar = $(".bottom_nav_bar");
+            
+            //调用deallist.js中的deallist方法
+            $("#deal_list").empty().deallist({
+                urlGenerator: urlGenerator,
+                loadingOperation: {
+                    loading: function() {
+                        loadingBar.css("display", "block");
+                    },
+                    end: function() {
+                        loadingBar.css("display", "none");
+                    }
+                }
+            });
+        }
+        var order = "hot_level";
+        
+        //页面加载函数
+        $.pageLoaded(function() {
+        	
+            var categoryId = $.getQueryParam("categoryId"),
+                bigCategoryId = categoryId,
+                keyword = $.getQueryParam("keyword"), sortDialog, categoryDialog;
+            
+            $.getCity(function(city) {
+            	$.print(city.name);
+            	
+               //关键字搜索
+                if (keyword) {
+                    order = "javaservice";
+                    
+                    //根据city，关键字查找
+                    searchDeals(city, keyword);
+                    $("#type").css("display", "none");
+                    bindSort([{
+                        name: "默认排序",
+                        id: "javaservice"
+                    }, {
+                        name: "按价格排序",
+                        id: "price"
+                    }, {
+                        name: "按折扣排序",
+                        id: "discount"
+                    }, {
+                        name: "按发布时间",
+                        id: "publish_time"
+                    }], function(data) {
+                        $("#sort").find("span").html(data.name);
+                        order = data.id;
+                        searchDeals(city, keyword);
+                    });
+                }
+               
+               //根据分类id搜索
+                else if (categoryId) {
+                	//根据city，分类id来获取分类list
+                    getCategoryDealList(city, categoryId);
+                	
+                	
+                	//点击事件
+                    $("#type").on("click", function() {
+                        var self = this;
+                        $.openSubCategoryDialog({
+                            itemClick: function(data) {
+                                var name = data.name;
+                                if (data.id == bigCategoryId)
+                                    name = "类别筛选";
+                                $(self).find("span").html(name);
+                                categoryId = data.id;
+                                //根据city和数据id来获取
+                                getCategoryDealList(city, data.id);
+                            },
+                            categoryId: bigCategoryId
+                        });
+                    });
+                    bindSort([{
+                        name: "默认排序",
+                        id: "hot_level"
+                    }, {
+                        name: "按价格排序",
+                        id: "price"
+                    }, {
+                        name: "按折扣排序",
+                        id: "discount"
+                    }, {
+                        name: "按发布时间",
+                        id: "publish_time"
+                    }], function(data) {
+                        $("#sort").find("span").html(data.name);
+                        order = data.id;
+                        //根据city和分类id获取
+                        getCategoryDealList(city, categoryId);
+                    });
+                } else {
+                    $(".deal_list").html("这个功能目前有点问题，请回退一下~");
+                }
+
+                function bindSort(data, itemClick) {
+                    $("#sort").on("click", function() {
+                        var self = this;
+                        if (sortDialog) {
+                            sortDialog.show();
+                        } else {
+                            sortDialog = $.openListDialog({
+                                itemTpl: '<div class="item"><span><[=name]></span></div> ',
+                                itemSelector: ".item",
+                                itemClick: itemClick,
+                                title: "排序方式",
+                                data: data
+                            });
+                        }
+                    });
+                }
+            });
+        });
+    </script>
+</head>
+<body>
+    <div class="viewport">
+        <div class="head_nav_bar">
+            <div id="type" class="filter_box float_left">
+                <span>类别筛选</span>
+                <div class="p_icon drop"></div>
+            </div>
+            <div id="sort" class="filter_box float_left">
+                <span>默认排序</span>
+                <div class="p_icon drop"></div>
+            </div>
+        </div>
+        <div class="scroll_wrapper">
+            <div class="scroller main">
+                <div id="deal_list" class="content1"></div>
+            </div>
+        </div>
+        <div class="bottom_nav_bar">
+            <div class="loading_content">
+                <div class="spinner"></div>
+                <span>正在获取内容，请稍候...</span>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

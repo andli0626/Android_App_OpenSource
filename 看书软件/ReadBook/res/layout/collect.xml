@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/book_list_bg"
+    android:orientation="vertical" >
+
+    <RelativeLayout
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:background="@drawable/titlebar_big" >
+
+        <TextView
+            android:id="@+id/tv_head"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:shadowColor="#ff000000"
+            android:shadowDx="2"
+            android:shadowDy="0"
+            android:shadowRadius="1"
+            android:text="收藏列表"
+            android:textColor="#ffffff"
+            android:textSize="18dp"
+            android:textStyle="bold" />
+    </RelativeLayout>
+
+    <ListView
+        android:id="@+id/collect_list"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:background="@drawable/book_list_bg" >
+    </ListView>
+
+</LinearLayout>

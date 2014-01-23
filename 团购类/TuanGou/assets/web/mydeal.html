@@ -1,0 +1,278 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="zh-CN" xml:lang="zh-CN">
+<head>
+    <meta name="viewport" content="width=device-width, height=device-height, initial-scale=1, maximum-scale=1">
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+    <title>Deal list</title>
+    <link type="text/css" rel="stylesheet" href="base.css"/>
+    <link type="text/css" rel="stylesheet" href="deallist.css"/>
+    <script type="text/javascript" src="tMobile.js"></script>
+    <script type="text/javascript" src="config.js"></script>
+    <script type="text/javascript" src="bridge.js"></script>
+    <script type="text/javascript" src="deallist.js"></script>
+    <style type="text/css">
+        .page {
+            padding: 10px;
+        }
+
+        .content1 {
+            padding: 10px;
+        }
+
+        p.tips {
+            margin-bottom: 10px;
+            font-size: 14px;
+            line-height: 20px;
+        }
+
+        .button {
+            width: auto;
+        }
+
+        ul, li {
+            padding: 0;
+            margin: 0;
+        }
+
+        .main {
+            padding: 50px 10px 10px 10px;
+        }
+
+        #header_tab {
+            width: 100%;
+            height: 40px;
+            list-style: none;
+            font-size: 16px;
+            text-shadow: 0 -1px 3px #cecece;
+        }
+
+        #header_tab li {
+            width: 50%;
+            float: left;
+            display: block;
+            background-image: -webkit-gradient(linear, 0 100%, 0 0, color-stop(0, #007c85), color-stop(0.5, #1a969f), color-stop(0.51, #2ca8b1), color-stop(1, #3fbbc4));
+            border-bottom: 1px solid #01b5c2;
+            border-top: 1px solid #368f96;
+            -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
+        }
+
+        #header_tab li.selected {
+            background-image: -webkit-gradient(linear, 0 100%, 0 0, color-stop(0, #39b5be), color-stop(0.5, #32aeb7), color-stop(0.51, #3db9c2), color-stop(1, #4fcbd4));
+        }
+
+        #header_tab li a {
+            color: white;
+            text-decoration: none;
+            text-align: center;
+            display: block;
+            line-height: 38px;
+            border-right: 1px solid #01b5c2;
+            border-left: 1px solid #368f96;
+        }
+
+        .bottom_nav_bar {
+            display: none;
+        }
+    </style>
+    <script type="text/javascript">
+        var deleteDialog, curOper = "favorite";
+
+        function load(method) {
+            curOper = method;
+            var pageset = 10,
+                type = method == "favorite" ? 0 : 1,
+                loadingBar = $(".bottom_nav_bar"),
+                emptyHtml = type ? "<p style='font-size: 16px;text-align:center;margin-top:5px;'>您当前没有已买团购</p>" :
+                            "<p style='font-size: 16px;text-align:center;margin-top:5px;'>您当前没有收藏团购信息</p>";
+
+            // tab
+            $("#header_tab li").removeClass("selected").filter("." + method).addClass("selected");
+            $(".scroller").css("display", "none");
+
+            $(".scroller." + method).css("display", "block").find(".deal_list").empty().deallist({
+                pageset: pageset,
+                ajaxType: "post",
+                tpl: '<div class="deal">'
+                    + '<a class="link" href="deal.html">'
+                        + '<div class="site">'
+                            + '<span class="name"><[=deal.site.name]></span>'
+                            + '<img src="<[=deal.imgUrlSmall]>">'
+                        + '</div>'
+                        + '<div class="content">'
+                            + '<span class="desc"><[=deal.name]></span>'
+                            + '<span class="price">¥<[=deal.price]></span>'
+                            + '<span class="discount"><[=deal.discount]>折</span>'
+                            + '<span class="area"><[=deal.shangquanName]></span>'
+                        + '</div>'
+                    + '</a>'
+                    + '</div>',
+                dataGenerator: function(pageset, page) {
+                    return {
+                        pageset: pageset,
+                        page: page,
+                        type: type
+                    };
+                },
+                urlGenerator: function(pageset, page, categoryId) {
+                    return "http://api.tuan800.com/mobile_api/android/get_my_deals";
+                },
+                getDealsFromData: function(data) {
+                    return data.myDeals;
+                },
+                dealRendered: function(dom, context) {
+                    var data = context.data,
+                        link = dom.filter("div").find("a.link").on("click", function(e) {
+                            e.preventDefault();
+                            $.openUrl("deal.html", {
+                                deal: data.deal,
+                                ui_title: "团购详情"
+                            });
+                        }), onme = true, timer;
+                    /**
+                     * 删除我的收藏和我的购买
+                     */
+                    link.on("touchstart", function(e) {
+                        onme = true;
+                        timer = setTimeout(function() {
+                            if (onme) {
+                                deleteMyDeal(dom, data);
+                            }
+                        }, 1000);
+                    }).on("touchmove", function(e) {
+                        clearTimeout(timer);
+                        onme = false;
+                    }).on("touchend", function(e) {
+                        clearTimeout(timer);
+                        onme = false;
+                    });
+                },
+                loadingOperation: {
+                    loading: function() {
+                        loadingBar.css("display", "block");
+                    },
+                    end: function() {
+                        loadingBar.css("display", "none");
+                    }
+                },
+                emptyHtml: emptyHtml
+            });
+        }
+
+        function deleteMyDeal(dom, data) {
+            if (deleteDialog) {
+                deleteDialog.data = data;
+                deleteDialog.dom = dom;
+                deleteDialog.show();
+            } else {
+                deleteDialog = $.openDialog({
+                    title: "请选择操作",
+                    content: '<div class="list"><div class="item delete">删除</div></div>',
+                    buttons: ["close"]
+                }).show();
+                deleteDialog.data = data;
+                deleteDialog.dom = dom;
+                deleteDialog.dialogEl.find(".delete").on("click", function() {
+//                    $.alert(deleteDialog.data.deal.id);
+                    var oper = curOper == "favorite" ? "remove_my_favorite_deal" : "remove_my_bought_deal";
+                    $.ajax({
+                        url: "http://api.tuan800.com/mobile_api/android/" + oper,
+                        type: "post",
+                        data: {dealIds: deleteDialog.data.deal.id},
+                        success: function(data) {
+                            if (data.status == 0) {
+                                deleteDialog.hide();
+                                deleteDialog.dom.filter(".deal").remove();
+                            } else {
+                                deleteDialog.hide();
+                                $.alert("出错啦，删除没成功。。。");
+                            }
+                        },
+                        error: function(error) {
+                            $.alert(error);
+                        }
+                    })
+                });
+            }
+        }
+
+        //检查是否登录
+        function checkLogin() {
+        	//已经登录
+            if ($.isLogin()) {
+            	 $.print("login is true");
+                $(".unlogin").css("display", "none");
+                $(".viewport").css("display", "block").find("#header_tab li a").un("click")
+                        .on("click", function(e) {
+                    e.preventDefault();
+                    if ($(this).parent().hasClass("favorite"))
+                        load("favorite");
+                    else
+                        load("bought");
+                });
+               
+                load("favorite");
+            }
+        	
+        	//没有登录
+            else {
+//                $.openUrl("login.html", {tip:"123456"});
+                $(".unlogin").css("display", "block");
+                $(".viewport").css("display", "none");
+            }
+        }
+        
+        //页面加载函数
+        $.pageLoaded(function() {
+            checkLogin();
+        });
+        $.pageResume(function() {
+            checkLogin();
+        });
+        
+        $.pageBack(function() {
+        	$.print("pageBack");
+            checkLogin();
+        });
+    </script>
+</head>
+<body>
+
+<div class="viewport">
+    <div class="head_nav_bar">
+        <ul id="header_tab">
+            <li class="favorite"><a href="#">我的收藏</a></li>
+            <li class="bought"><a href="#">我的购买</a></li>
+        </ul>
+    </div>
+    <div class="scroll_wrapper">
+        <div class="scroller main favorite">
+            <div class="deal_list content1"></div>
+        </div>
+        <div class="scroller main bought" style="display: none;">
+            <div class="deal_list content1"></div>
+        </div>
+    </div>
+    <div class="bottom_nav_bar">
+        <div class="loading_content">
+            <div class="spinner"></div>
+            <span>正在获取内容，请稍候...</span>
+        </div>
+    </div>
+</div>
+
+<div class="page_margins unlogin" style="display: none">
+    <div class="page">
+        <div class="content1">
+            <p class="tips">使用账号登录，可以方便的管理您已经收藏和购买的团购，随时找到需要的信息。<br/><br/>实例账号如下：<br/><br/>账号：androidSource <br/><br/>密码：123456
+            </p>
+
+            <div class="button" onclick="$.openUrl('login.html', {ui_title: '登录', tip: '登录后可以查看您收藏和已买的团购信息'});">登 录
+            </div>
+        
+    </div>
+</div>
+
+
+</body>
+</html>

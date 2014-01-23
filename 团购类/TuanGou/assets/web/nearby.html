@@ -1,0 +1,174 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="zh-CN" xml:lang="zh-CN">
+<head>
+    <meta name="viewport" content="width=device-width, height=device-height, initial-scale=1, maximum-scale=1">
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+    <title>Nearby deals</title>
+    <link type="text/css" rel="stylesheet" href="base.css"/>
+    <link type="text/css" rel="stylesheet" href="deallist.css"/>
+    <script type="text/javascript" src="tMobile.js"></script>
+    <script type="text/javascript" src="config.js"></script>
+    <script type="text/javascript" src="bridge.js"></script>
+    <script type="text/javascript" src="deallist.js"></script>
+    <style type="text/css">
+        .main {
+            padding: 50px 10px 10px 10px;
+        }
+        .head_nav_bar {
+            height: 40px;
+        }
+        #type {
+            margin-right: 5px;
+        }
+        .head_nav_bar .position {
+            height: 40px;
+            line-height: 20px;
+            margin-right: 5px;
+        }
+        .bottom_nav_bar {
+            display: none;
+        }
+    </style>
+    <script type="text/javascript">
+
+        function getNeaybyDeals(loc) {
+            if (!loc) return;
+            curLocation = loc;
+            var longitude = loc.longitude,
+                latitude = loc.latitude,
+                loadingBar = $(".bottom_nav_bar"),
+                cityId = city.id;
+            
+            $.print("location");
+            $.print(city.id);
+            $.print(loc.longitude);
+            $.print(loc.latitude);
+            
+            
+            $("#deal_list").empty().deallist({
+                urlGenerator: function(pageset, page, categoryId) {
+                    var url =  "http://www.tuan800.com/mobile_api/android/get_near_deals?cityId=" + cityId + "&longitude=" + longitude +
+                        "&latitude=" + latitude + "&pageNum=" + page + "&countPerPage=" + pageset;
+
+                    if (tagId > 0)
+                        url += "&tagId=" + tagId;
+                    return url;
+                },
+                dealRendering: function(context) {
+                    var data = context.data, distance = 0, len = data.shops.length;
+                    if (len == 0) {
+                        data.shangquanName = data.shangquanName;
+                        return;
+                    }
+                    distance = $.getDistance(latitude, longitude, data.shops[0].latitude, data.shops[0].longitude);
+                    if (len > 1) {
+                        var _tempId,  _flag = false;
+                        for (var i = 1; i < len; i ++) {
+                            var d = $.getDistance(latitude, longitude, data.shops[i].latitude, data.shops[i].longitude);
+                            if (d < distance) {
+                                _flag = true;
+                                distance = d;
+                                _tempId = i;
+                            }
+                        }
+                        if(!_flag) {
+                            _tempId = 0;
+                        }
+                        data.nearestShopId = _tempId;
+                    }
+                    if (distance <= 1) {
+                        data.shangquanName = distance * 1000 + "米"
+                    }
+                    else {
+                        data.shangquanName = distance + "千米";
+                    }
+                },
+                loadingOperation: {
+                    loading: function() {
+                        loadingBar.css("display", "block");
+                    },
+                    end: function() {
+                        loadingBar.css("display", "none");
+                    }
+                }
+            });
+        }
+        var city, tagId = -1, curLocation;
+
+        //页面加载函数
+        $.pageLoaded(function() {
+        	//获取city
+            $.getCity(function(c) {
+                city = c;
+                
+                //获取位置
+                $.getLatLon(getNeaybyDeals);
+                //获取地址
+                $.getAddress(function(address) {
+                    var str;
+                    if (address) {
+                        str = address;
+                    } else {
+                        str = "";
+                    }
+                    $(".head_nav_bar .position").html(str);
+                });
+            });
+            // 绑定类别筛选按钮
+            $("#type").on("click", function() {
+                var self = this;
+                $.openCategoryDialog({
+                    itemClick: function(data) {
+                        var name = data.name;
+                        if (data.id == -1)
+                            name = "类别筛选";
+                        $(self).find("span").html(name);
+                        tagId = data.id;
+                        getNeaybyDeals(curLocation);
+                    }
+                });
+            });
+        });
+
+        $.pageResume(function() {
+            $.getCity(function(c) {
+                city = c;
+                $.getLatLon(getNeaybyDeals);
+                $.getAddress(function(address) {
+                    var str;
+                    if (address) {
+                        str = address;
+                    } else {
+                        str = "";
+                    }
+                    $(".head_nav_bar .position").html(str);
+                });
+            });
+        });
+    </script>
+</head>
+<body>
+    <div class="viewport">
+        <div class="head_nav_bar">
+            <div id="type" class="filter_box float_left">
+                <span>类别筛选</span>
+
+                <div class="p_icon drop"></div>
+            </div>
+            <div class="position">正在获取位置信息...</div>
+        </div>
+        <div class="scroll_wrapper">
+            <div class="scroller main">
+                <div id="deal_list" class="content1"></div>
+            </div>
+        </div>
+        <div class="bottom_nav_bar">
+            <div class="loading_content">
+                <div class="spinner"></div>
+                <span>正在获取内容，请稍候...</span>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

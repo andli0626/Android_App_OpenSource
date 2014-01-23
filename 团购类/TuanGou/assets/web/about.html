@@ -1,0 +1,73 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="zh-CN" xml:lang="zh-CN">
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+    <title>About Us</title>
+    <link type="text/css" rel="stylesheet" href="base.css"/>
+    <link type="text/css" rel="stylesheet" href="content_default.css"/>
+    <link type="text/css" rel="stylesheet" href="basemod.css"/>
+    <script type="text/javascript" src="tMobile.js"></script>
+    <script type="text/javascript" src="config.js"></script>
+    <style type="text/css">
+        .main {
+            padding: 20px 10px;
+        }
+        .about, .home, .mobile, .feedback, .cur_version {
+            margin-bottom: 10px;
+            background-image: -webkit-gradient(linear, 0 100%, 0 0, color-stop(0, #dcdcdc), color-stop(1, #f0f0f0));
+            padding: 10px;
+            -webkit-border-radius: 8px;
+            border: 2px solid #fff;
+            color: #445668;
+            line-height: 20px;
+            font-size: 14px;
+        }
+
+        h4 {
+            font-size: 16px;
+            margin-bottom: 10px;
+        }
+
+        a {
+            color: #2fdec3;
+            text-decoration: none;
+        }
+
+    </style>
+    <script type="text/javascript">
+        function feedback() {
+            $.share("hello");
+        }
+
+        document.addEventListener('DOMContentLoaded', loadAbout,false);
+
+        function loadAbout() {
+            $(".scroller").scroller();
+        }
+    </script>
+</head>
+<body>
+<div class="viewport">
+    <div class="scroll_wrapper">
+        <div class="scroller main">
+            <div class="about"><h4>Android源码工作室</h4>
+                <p>官方淘宝(<a href="http://androidsource.taobao.com">http://androidsource.taobao.com</a>)，Android源码工作室，由一批具有丰富实战项目经验的技术团队创建，旨在为想迅速学习Android开发，提高Android开发技术等开发人员或感兴趣的爱好者提供最新，最详细，最实用的实战源码，从而尽可能快的掌握Android开发!</p>
+
+            </div>
+            <div class="home"><h4>官方博客</h4><a href="http://www.cnblogs.com/love1025/">http://www.cnblogs.com/love1025/</a></div>
+            <div class="mobile"><h4>官方QQ</h4><a href="QQ: androidsource@139.com">QQ: androidsource@139.com</a></div>
+            <div class="feedback"><h4>意见反馈</h4>
+
+                <p onclick="feedback()">androidsource@139.com
+
+                <p></div>
+            <div class="cur_version"><h4>当前版本</h4>
+
+                <p class="version">3.2.2</p></div>
+        </div>
+    </div>
+</div>
+</body>
+</html>

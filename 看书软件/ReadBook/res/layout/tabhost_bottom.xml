@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="utf-8"?>
+<TabHost xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@android:id/tabhost"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent" >
+
+    <LinearLayout
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:orientation="vertical" >
+
+        <FrameLayout
+            android:id="@android:id/tabcontent"
+            android:layout_width="fill_parent"
+            android:layout_height="0dip"
+            android:layout_weight="1.0" />
+
+        <TabWidget
+            android:id="@android:id/tabs"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="0.0"
+            android:visibility="gone" />
+
+        <RadioGroup
+            android:id="@+id/main_tab"
+            android:layout_width="fill_parent"
+            android:layout_height="48dip"
+            android:layout_gravity="bottom"
+            android:background="@drawable/tabhost_bg"
+            android:gravity="center_vertical"
+            android:orientation="horizontal" >
+
+            <RadioButton
+                android:id="@+id/radio_main"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="2dip"
+                android:layout_weight="1"
+                android:background="@drawable/tabhost_bg"
+                android:button="@null"
+                android:drawablePadding="2dip"
+                android:drawableTop="@drawable/book_icon"
+                android:ellipsize="marquee"
+                android:gravity="center_horizontal"
+                android:padding="2dip"
+                android:paddingTop="8dip"
+                android:singleLine="true"
+                android:text="本地阅读"
+                android:textColor="@android:color/primary_text_light"
+                android:textSize="10sp" />
+            
+            <RadioButton
+                android:id="@+id/radio_net"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="2dip"
+                android:layout_weight="1"
+                android:background="@drawable/tabhost_bg"
+                android:button="@null"
+                android:drawablePadding="2dip"
+                android:drawableTop="@drawable/bookcity_icon"
+                android:ellipsize="marquee"
+                android:gravity="center_horizontal"
+                android:padding="2dip"
+                android:paddingTop="8dip"
+                android:singleLine="true"
+                android:text="网上书城"
+                android:textColor="@android:color/primary_text_light"
+                android:textSize="10sp" />
+
+            <RadioButton
+                android:id="@+id/radio_collect"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="2dip"
+                android:layout_weight="1"
+                android:background="@drawable/tabhost_bg"
+                android:button="@null"
+                android:drawablePadding="2dip"
+                android:drawableTop="@drawable/collect_icon"
+                android:ellipsize="marquee"
+                android:gravity="center_horizontal"
+                android:paddingTop="5dip"
+                android:singleLine="true"
+                android:text="我的收藏"
+                android:textColor="@android:color/primary_text_light"
+                android:textSize="10sp" />
+            
+        </RadioGroup>
+    </LinearLayout>
+
+</TabHost>

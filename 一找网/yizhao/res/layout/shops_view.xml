@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android" android:padding="5dp" android:background="@drawable/detail_shops_selec2" android:orientation="horizontal" android:layout_width="fill_parent" android:layout_height="wrap_content" android:gravity="center_vertical">
+	<TextView android:id="@+id/shop_name" android:layout_weight="1" android:ellipsize="end" android:singleLine="true" android:gravity="right" style="@style/theme_fontcolor_blake" android:layout_height="wrap_content" android:text="查询中" android:layout_width="fill_parent"></TextView>
+	<TextView android:id="@+id/shop_pric" android:layout_weight="1" android:gravity="center" style="@style/theme_fontcolor_red" android:layout_height="wrap_content" android:text="0元" android:layout_width="fill_parent"></TextView>
+	<LinearLayout android:layout_weight="1" android:gravity="right" android:layout_height="wrap_content" android:layout_width="fill_parent" android:paddingRight="5dp">
+		<ImageView android:src="@drawable/jt2" android:layout_height="11dp" android:layout_width="11dp"/>
+	</LinearLayout>
+</LinearLayout>
+
+    	

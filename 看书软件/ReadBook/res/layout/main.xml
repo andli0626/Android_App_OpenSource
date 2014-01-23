@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+	xmlns:android="http://schemas.android.com/apk/res/android"
+	android:orientation="vertical"
+	android:layout_width="fill_parent"
+	android:layout_height="fill_parent"
+>
+<include layout="@layout/head" android:id="@+id/head"/>
+
+	<cn.com.karl.view.MyGridView
+	    android:id="@+id/bookShelf"
+	    android:layout_width="fill_parent"
+	    android:layout_height="fill_parent"
+	    android:layout_below="@id/head"
+	    android:cacheColorHint="#00000000"
+	    android:columnWidth="90.0dip"
+	    android:fadingEdge="none"
+	    android:horizontalSpacing="5dp"
+	    android:listSelector="#00000000"
+	    android:numColumns="3"
+	    android:scrollbars="none"
+	    android:verticalSpacing="20dp" />
+	
+   <SlidingDrawer  
+        android:id="@+id/sliding"  
+        android:layout_width="fill_parent"  
+        android:layout_height="400dp"
+        android:layout_marginTop="250dp"
+        android:layout_gravity="bottom"
+        android:content="@+id/allApps"  
+        android:handle="@+id/imageViewIcon"  
+        android:orientation="vertical" >  
+        
+	       
+        <Button  
+            android:id="@+id/imageViewIcon"  
+            android:layout_width="wrap_content"  
+            android:layout_height="wrap_content"  
+            android:text="菜单"
+            android:textSize="18dp"
+            android:background="@drawable/btn_local" /> 
+             
+        <GridView  
+            android:id="@+id/allApps"  
+            android:layout_width="wrap_content"  
+            android:layout_height="wrap_content"  
+            android:background="@drawable/file_list_bg"  
+            android:columnWidth="70dp"  
+            android:gravity="center"  
+            android:horizontalSpacing="10dp"  
+            android:numColumns="auto_fit"  
+            android:padding="10dp"  
+            android:stretchMode="columnWidth"  
+            android:verticalSpacing="10dp" />  
+  
+    </SlidingDrawer>  
+</RelativeLayout>

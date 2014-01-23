@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout android:orientation="vertical" android:layout_width="wrap_content" android:layout_height="wrap_content"
+  xmlns:android="http://schemas.android.com/apk/res/android">
+    <LinearLayout android:orientation="vertical" android:layout_width="wrap_content" android:layout_height="wrap_content" android:layout_alignParentBottom="true" android:layout_centerHorizontal="true">
+        <ProgressBar android:layout_gravity="center" android:id="@+id/progressBar" android:layout_width="40.0dip" android:layout_height="40.0dip" android:layout_marginBottom="10.0dip" style="?android:attr/progressBarStyle" />
+        <TextView android:layout_gravity="center" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="@string/web_loading" />
+    </LinearLayout>
+</LinearLayout>

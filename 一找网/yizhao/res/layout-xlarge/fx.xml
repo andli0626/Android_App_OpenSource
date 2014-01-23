@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android" android:orientation="vertical" android:gravity="bottom" android:layout_width="fill_parent" android:layout_height="fill_parent">
+
+	<LinearLayout android:orientation="vertical"
+			android:layout_width="fill_parent"
+			android:layout_height="wrap_content"
+			android:gravity="center"
+			android:background="@drawable/dialog_bg">
+     
+    <TextView android:id="@+id/dialog_bt_fx_sina"  
+              android:layout_width="686dp"  
+              android:layout_height="114dp"  
+              android:text="分享到新浪微博"  
+              android:gravity="center" 
+              style="@style/theme_fontcolor_blake"
+              android:layout_margin="3dp"
+              android:background="@drawable/fx_selec"
+              android:textAppearance="?android:attr/textAppearanceLarge"
+              />  
+    <TextView android:id="@+id/dialog_bt_fx_tencent"  
+               android:layout_width="686dp"
+              android:layout_height="114dp"  
+              android:text="分享到腾讯微博"  
+              android:gravity="center" 
+              style="@style/theme_fontcolor_blake"
+              android:layout_margin="3dp"
+              android:background="@drawable/fx_selec" 
+              android:textAppearance="?android:attr/textAppearanceLarge"
+              /> 
+    <TextView android:id="@+id/dialog_bt_fx_sms"  
+               android:layout_width="686dp"
+              android:layout_height="114dp"  
+              android:text="其它分享方式"  
+              android:gravity="center" 
+              style="@style/theme_fontcolor_blake"
+              android:layout_margin="3dp"
+              android:background="@drawable/fx_selec" 
+              android:textAppearance="?android:attr/textAppearanceLarge"
+              /> 
+    <TextView android:id="@+id/dialog_bt_cancel"  
+              android:layout_width="686dp"
+              android:layout_height="114dp"  
+              android:text="取消"
+              android:gravity="center"  
+              style="@style/theme_fontcolor_white"
+              android:background="@drawable/dialog_bt2_bg"
+              android:layout_margin="3dp"
+              android:textAppearance="?android:attr/textAppearanceLarge"
+              />  
+              
+	</LinearLayout>
+</LinearLayout>

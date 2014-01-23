@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="wel_str">一找公司 版权所有 version1.0\nCopyright © 2009-2011 Yeezhao All Rights Rewerved</string>
+    <string name="app_name">一找网</string>
+    <string name="checked_newapk">检测到有新的版本下载</string>
+    <string name="checked_newir">检测到有新的搜索关键字</string>
+    <string name="download_retry">下载失败,请稍后重试！</string>
+    <string name="download_nosdcard">下载失败,请正确插入您的SD卡！</string>
+    <string name="download_filenofound">下载失败,下载文件不存在！</string>
+    <string name="downloaded">下载完成！</string>
+    <string name="download_finish">下载完成,是否现在安装？</string>
+    <string name="setup_ask">文件已保存至存储卡yizhaowang目录下,是否现在安装</string>
+    <string name="setup_ready">下载完成,准备安装！</string>
+    <string name="upload_ask">是否现在更新？</string>
+    <string name="appstart_fail">启动失败,请检查您的网络连接是否正常！</string>
+    <string name="reading_update">正在读取更新信息...</string>
+    <string name="appstart_initing">正在初始化软件信息...</string>
+    <string name="reading">数据读取中,请稍候...</string>
+    <string name="busy">系统繁忙,请稍候重试！</string>
+    <string name="con_fail">与服务器连接失败,请稍候重试！</string>
+    <string name="fx_fail">分享失败,请稍候重试！</string>
+    <string name="appkey_fail">APPKEY验证失败,请稍候重试！</string>
+    <string name="login_fail">登录失败,请稍候重试！</string>
+    <string name="logined_sina">新浪微博登录成功,您可以开始分享了！</string>
+    <string name="logined_tencent">腾讯微博登录成功,您可以开始分享了！</string>
+</resources>

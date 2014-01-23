@@ -1,0 +1,4 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android" android:gravity="center" android:layout_height="wrap_content" android:layout_width="fill_parent" android:padding="28dp">
+	<TextView android:id="@+id/more_receive" android:background="@drawable/more_shops" android:text="查看更多评论" style="@style/theme_fontcolor_CCC" android:textAppearance="?android:attr/textAppearanceLarge" android:gravity="center" android:layout_height="76dp" android:layout_width="436dp"/>
+</LinearLayout>

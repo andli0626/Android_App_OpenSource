@@ -1,0 +1,393 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="zh-CN" xml:lang="zh-CN">
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+    <title>Category</title>
+    <link type="text/css" rel="stylesheet" href="base.css"/>
+    <script type="text/javascript" src="tMobile.js"></script>
+    <script type="text/javascript" src="config.js"></script>
+    <script type="text/javascript" src="bridge.js"></script>
+    <style type="text/css">
+        .main {
+            padding: 20px 10px;
+        }
+
+        .div1, .div2, .div3 {
+            -webkit-border-radius: 8px;
+            border: 2px solid #fff;
+            background-color: #fff;
+            font-size: 14px;
+        }
+
+        .div2, .div3 {
+            margin-top: 10px;
+        }
+
+        .detail ul, .div2 p, .notice {
+            color: #737373;
+        }
+        .div1 .topBar {
+            height: 35px;
+            line-height: 35px;
+            padding: 0 5px;
+        }
+
+        .div1 .topBar .time {
+            float: left;
+        }
+
+        .div1 .topBar .count {
+            float: right;
+        }
+
+        .div1 .detail {
+            padding: 10px 5px;
+            border-bottom: 1px solid #aaa;
+        }
+
+        .div1 .detail p {
+            display: block;
+            font-size: 13px;
+            margin-bottom: 10px;
+        }
+
+        .div1 .detail img {
+            float: left;
+            width: 180px;
+            height: 110px;
+            border: 2px solid #dcdcdc;
+            margin-right: 5px;
+        }
+
+        .div1 .detail ul {
+            margin: 0;
+            padding: 0;
+            list-style: none;
+            height: 110px;
+        }
+
+        ul li {
+            margin-bottom: 10px;
+        }
+
+        ul li:first-child {
+            color: red;
+            font-size: 16px;
+            font-weight: bold;
+        }
+
+        .div1 .bottomBar {
+            position: relative;
+            height: 40px;
+            padding: 0 5px;
+            border-bottom: none;
+            overflow: hidden;
+        }
+
+        .bottomBar .comments {
+            color: #015789;
+            font-size: 13px;
+            line-height: 40px;
+            float: left;
+            margin-right: 10px;
+        }
+
+        .bottomBar .comments span {
+            color: red;
+        }
+
+        .bottomBar .fav, .bottomBar .share {
+            float: left;
+            margin-top: 4px;
+        }
+
+        .bottomBar .fav {
+            margin-right: 10px;
+        }
+
+        .fav .abc, .share .def {
+            float: left;
+            height: 30px;
+            width: 30px;
+            display: block;
+        }
+
+        .fav .abc {
+             background-position: -90px 0;
+        }
+
+        .share .def {
+            background-position: -120px 0;
+        }
+
+        .div2 .name {
+            height: 35px;
+            line-height: 35px;
+            padding: 0 5px;
+        }
+
+        .div2 .name .shopName {
+            float: left;
+        }
+
+        .div2 .name .viewMap {
+            float: right;
+            text-align: center;
+            height: 25px;
+            line-height: 25px;
+            margin: 3px 0;
+        }
+
+        .div2 p {
+            margin: 5px;
+        }
+
+        .div2 .more {
+            height: 30px;
+            width: 50%;
+            line-height: 30px;
+            text-align: center;
+            color: #015789;
+            -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
+            margin-bottom: 5px;
+            margin-left: 5px;
+        }
+
+        .div2 .more:hover {
+            -webkit-border-radius: 10px;
+            background-color: rgba(132, 132, 132, .5);
+        }
+
+        .div2 .more span {
+            color: red;
+        }
+
+        .div3 .site {
+            height: 55px;
+            padding: 0 5px;
+            overflow: hidden;
+        }
+
+        .site .left, .site .right {
+            margin-right: 5px;
+            float:left;
+        }
+        .site .left {
+            margin-top: 5px;
+            width: 100px;
+            height: 40px;
+        }
+
+        .stars {
+            margin-top: 4px;
+            width: 100%;
+            height: 20px;
+            overflow: hidden;
+            white-space: nowrap;
+        }
+
+        .stars .siteName {
+            font-size: 13px;
+            float: left;
+            margin-right: 5px;
+        }
+
+        .stars .star {
+            height: 15px;
+            width: 15px;
+            float: left;
+        }
+
+        .stars .star.full {
+            background-position: 0 -70px;
+        }
+        .stars .star.half {
+            background-position: -15px -70px;
+        }
+        .stars .star.gray {
+            background-position: -30px -70px;
+        }
+
+        .right .btn_site{
+            height: 25px;
+            width: 100px;
+            -webkit-border-radius: 6px;
+            line-height:25px;
+            text-align: center;
+            -webkit-box-shadow: 0 1px 3px rgba(0,0,0,0.5);
+            border-bottom: 1px solid rgba(0,0,0,0.15);
+        }
+
+        .div3 .notice {
+            padding: 5px;
+        }
+        .notice h3 {
+            margin-bottom: 5px;
+            color: #000;
+        }
+    </style>
+    <script type="text/html" id="deal_tpl">
+        <div class="div1">
+            <div class="bar topBar">
+                <span class="time"><[=$.getTimeLeft(closeTime)]></span>
+                <span class="count">已售<[=soldCount]>件</span>
+            </div>
+            <div class="detail">
+                <p><[=name]></p>
+
+                <img class="image" src="<[=_text_mode ? 'text-mode.png' : imgUrlNormal]>"/>
+
+                <ul>
+                    <li>¥<[=price]></li>
+                    <li>原价: <[=value]>元</li>
+                    <li>折扣: <[=discount]>折</li>
+                    <li>节省: <[=Math.round(value-price)]></li>
+                </ul>
+            </div>
+            <div class="bar bottomBar">
+                <div class="comments">全部<span><[=commentsCount]></span>条评论>></div>
+                <div class="button fav">
+                    <span class="p_icon abc"></span>收藏
+                </div>
+                <div class="button share">
+                    <span class="p_icon def"></span>分享
+                </div>
+            </div>
+        </div>
+
+        <[if($data.shops && $data.shops.length){var shop;if(typeof($data.nearestShopId)!="undefined"){shop=$data.shops[$data.nearestShopId];}else{shop=$data.shops[0];}]>
+        <div class="div2">
+            <div class="bar name">
+                <span class="shopName"><[=shop.name]></span>
+                <[if (shop.latitude) {]>
+                <div class="button viewMap">查看地图</div>
+                <[}]>
+            </div>
+            <[if (shop.address) {]>
+            <p>地址:<[=shop.address]></p>
+            <[}]>
+
+            <[if (shop.tel) {]>
+            <p>电话:<[=shop.tel]></p>
+            <[}]>
+
+            <[}if($data.shops.length > 1){]>
+            <div class="more">还有<span><[=$data.shops.length - 1]></span>家分店可选>>></div>
+            <[}]>
+        </div>
+        <div class="div3">
+            <div class="bar site">
+                <img class="left" src="<[=site.logoUrl]>"/>
+                <div class="right">
+                    <div class="stars">
+                        <div class="siteName"><[=site.name]></div>
+                        <div class="p_icon star gray"></div>
+                        <div class="p_icon star gray"></div>
+                        <div class="p_icon star gray"></div>
+                        <div class="p_icon star gray"></div>
+                        <div class="p_icon star gray"></div>
+                    </div>
+                    <div class="button btn_site">去原始网页</div>
+                </div>
+            </div>
+            <div class="notice">
+                <h3>用户须知</h3><[=notice]>
+            </div>
+        </div>
+    </script>
+
+    <script type="text/javascript">
+        $.pageLoaded(function() {
+
+            // Get image mode
+            window._text_mode = false;
+            $.openDatabase(function(db) {
+                db.getPreference("text_mode", function(val) {
+                    window._text_mode = val == "1";
+                });
+            });
+
+            var deal = $.getContextDataObj("deal");
+
+            $(".scroller").tmpl({
+                tplContainerId: "deal_tpl",
+                data: deal,
+                rendered: function(dom, context) {
+                    var deal = context.data,
+                            score = (deal.site.score || 0) / 2;
+                    dom.filter("div").find(".stars .star").each(function(el, idx) {
+                        var cls = false;
+                        if (idx + 1 - score == 0.5)
+                            cls = "half";
+                        else if (idx + 1 - score <= 0)
+                            cls = "full";
+                        if (cls)
+                            $(el).removeClass("gray").addClass(cls);
+                    });
+
+                    dom.filter("div").find(".comments").on("click", function(e){
+                        e.preventDefault();
+                        $.openUrl("comments.html", {dealId: deal.id,ui_title: "用户评论"});
+                    });
+
+                    dom.filter("div").find(".fav").on("click", function(e){
+                         $.umengEvent("deal_store");
+                         if ($.isLogin()) {
+                             $.ajax({
+                                 type: "post",
+                                 url: "http://api.tuan800.com/mobile_api/android/add_my_deal",
+                                 data: {type: "0", dealId: deal.id},
+                                 success: function(data) {
+                                     if(data) {
+                                         $.alert("收藏成功");
+                                     }
+                                 }
+                             });
+                         } else {
+                             $.openUrl("login.html");
+                         }
+                    });
+
+                    dom.filter("div").find(".share").on("click", function(e) {
+                        e.preventDefault();
+                        $.umengEvent("deal_share");
+                        var content = deal.name + "\n" + deal.dealUrl;
+                        $.share(content);
+                    });
+
+                    dom.filter("div").find(".viewMap").on("click", function(e) {
+                        var idx;
+                        if (typeof(deal.nearestShopId) != "undefined") {
+                            idx = deal.nearestShopId;
+                        } else {
+                            idx = 0;
+                        }
+                        $.viewMap(deal.shops[idx]);
+                    });
+
+                    dom.filter("div").find(".btn_site").on("click", function(e) {
+                        $.umengEvent("deal_tosee");
+                        var deal_url = deal.dealUrl;
+                        $.toDealSite(deal_url);
+                    });
+
+                    dom.filter("div").find(".more").on("click", function(e) {
+                        $.openUrl("shops.html", {shops: deal.shops, ui_title: "商铺信息"});
+                    });
+                }
+            }).scroller();
+        });
+    </script>
+</head>
+<body>
+<div class="viewport">
+    <div class="scroll_wrapper">
+        <div class="scroller main">
+
+        </div>
+    </div>
+</div>
+</body>
+</html>

@@ -1,0 +1,108 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="zh-CN" xml:lang="zh-CN">
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+    <title>Register</title>
+    <link type="text/css" rel="stylesheet" href="base.css"/>
+    <script type="text/javascript" src="tMobile.js"></script>
+    <script type="text/javascript" src="config.js"></script>
+    <script type="text/javascript" src="bridge.js"></script>
+    <style type="text/css">
+        body, div,form, fieldset, input {
+            margin: 0;
+            padding: 0;
+            border: 0;
+            outline: none;
+        }
+
+        .main {
+            margin: 20px 10px;
+        }
+
+        form {
+            display: block;
+            background-color: #dcdcdc;
+            -webkit-border-radius: 8px;
+            border: 2px solid #fff;
+            padding: 30px 0;
+            color: #445668;
+        }
+
+        label {
+            float: left;
+            clear: left;
+            margin: 11px 20px 0 0;
+            width: 80px;
+            text-align: right;
+            font-size: 16px;
+            text-shadow: 0 1px 0 #f2f2f2;
+        }
+
+        input {
+            float: left;
+            height: 35px;
+            padding: 5px 20px 0 5px;
+            margin: 0 0 20px 0;
+            background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#007c85), color-stop(20%,#0e8e97));
+            -webkit-border-radius: 5px;
+            -webkit-box-shadow: 0 1px 0 #f2f2f2;
+            color: #f2f2f2;
+            font-size: 14px;
+            text-shadow: 0 -1 0 #334f71;
+            -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
+        }
+
+        input::-webkit-input-placeholder {
+            color: #a1b2c3;
+            text-shadow: 0px -1px 0px #38506b;
+        }
+
+        .captcha {
+            float: left;
+            clear: left;
+            padding: 0 0 10px 100px;
+        }
+
+        .submit {
+            height: 40px;
+            width: 150px;
+            line-height: 40px;
+            text-align: center;
+            color: #a1b2c3;
+            font-size: 16px;
+            -webkit-box-shadow: 0 0 5px #999;
+            background:-webkit-gradient(linear, left top, left bottom, color-stop(0%,#28a3ac), color-stop(100%,#007c85));
+            margin: 0 0 15px 100px;
+            -webkit-border-radius: 5px;
+        }
+    </style>
+    <script type="text/javascript">
+        $.pageLoaded(function() {
+            $(".submit").on("click", function() {
+
+            });
+        });
+    </script>
+</head>
+<body>
+<div class="page_margins">
+    <div class="page">
+        <div class="main">
+            <form>
+                <fieldset id="loginInfo">
+                    <label for="name">用户名:</label>
+                    <input type="text" id="name" placeholder="输入用户名">
+                    <label for="password">密码:</label>
+                    <input type="password" id="password" placeholder="输入密码">
+                    <label for="confirm">确认密码:</label>
+                    <input type="password" id="confirm" placeholder="确认密码">
+                </fieldset>
+                <div class="submit">注册</div>
+            </form>
+        </div>
+    </div>
+</div>
+</body>
+</html>

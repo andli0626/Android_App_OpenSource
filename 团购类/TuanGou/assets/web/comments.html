@@ -1,0 +1,100 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="zh-CN" xml:lang="zh-CN">
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+    <title>Comments</title>
+    <link type="text/css" rel="stylesheet" href="base.css"/>
+    <script type="text/javascript" src="tMobile.js"></script>
+    <script type="text/javascript" src="config.js"></script>
+    <script type="text/javascript" src="bridge.js"></script>
+    <style type="text/css">
+        .main {
+            margin: 20px 10px 50px 10px;
+            -webkit-border-radius: 8px;
+            background-image: -webkit-gradient(linear, 0 100%, 0 0, color-stop(0, #dcdcdc), color-stop(1, #f0f0f0));
+            padding: 5px 0;
+            border: 2px solid #fff;
+        }
+
+        .comment {
+            padding: 8px 5px;
+        }
+
+        .comment .content {
+            margin-bottom: 5px;
+            font-size: 14px;
+        }
+
+        .comment .username {
+            color: #727781;
+            margin-right: 20px;
+            font-size: 13px;
+            font-weight: bold;
+            margin-bottom: 20px;
+        }
+
+        .comment .submitTime {
+            color: #727781;
+
+        }
+    </style>
+    <script type="text/html" id="comment_tpl">
+        <div class="bar comment">
+            <div class="content"><[=content]></div>
+            <div class="username"><[=user.name]></div>
+            <div class="submitTime"><[=time]></div>
+        </div>
+    </script>
+    <script type="text/javascript">
+        $.pageLoaded(function() {
+            var id = $.getContextDataObj("dealId"), loading = false, curPage = 1,
+                    loadingDialog = $.openWaiting(),
+                    meetTheEnd = false;
+            function load(page) {
+                if (meetTheEnd || loading) return;
+                loading = true;
+                loadingDialog.show();
+                $.ajax({
+                    url: "http://api.tuan800.com/mobile_api/android/get_comments?dealId=" + id + "&pageset=20&page=" + page,
+                    success: function(data) {
+                        var comments = data.comments;
+                        if (comments && comments.length) {
+                            curPage = page;
+                            $(".scroller").tmpl({
+                                str: "comment_tpl",
+                                append: true,
+                                data: comments
+                            });
+                        } else {
+                            meetTheEnd = true;
+                            if (curPage == 1) {
+                                $(".main").html("<p style='font-size: 16px;text-align:center;margin-top:5px;'>该团购没有相关评论-_-!</p>");
+                            }
+                        }
+                        loading = false;
+                        loadingDialog.hide();
+                    }
+                });
+            }
+
+            load(1);
+
+            $(".scroller").scroller({
+                onbottom: function() {
+                    load(curPage + 1);
+                }
+            });
+        });
+    </script>
+</head>
+<body>
+<div class="viewport">
+    <div class="scroll_wrapper">
+        <div class="scroller main">
+        </div>
+    </div>
+</div>
+</body>
+</html>

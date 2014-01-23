@@ -1,0 +1,208 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="zh-CN" xml:lang="zh-CN">
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+    <title>Login</title>
+    <link type="text/css" rel="stylesheet" href="base.css"/>
+    <script type="text/javascript" src="tMobile.js"></script>
+    <script type="text/javascript" src="config.js"></script>
+    <script type="text/javascript" src="bridge.js"></script>
+    <style type="text/css">
+        body, div, h1, form, fieldset, input {
+            margin: 0;
+            padding: 0;
+            border: 0;
+            outline: none;
+        }
+
+        .main {
+            margin: 20px 10px;
+        }
+
+        .div1, .div2 {
+            background-color: #dcdcdc;
+            -webkit-border-radius: 8px;
+            border: 2px solid #fff;
+            color: #445668;
+        }
+
+        .div1 {
+            padding: 5px;
+            line-height: 20px;
+        }
+
+        .div2 {
+            display: block;
+            margin-top: 10px;
+            padding: 30px 0;
+        }
+
+        .div1 h3 {
+            color: #000;
+        }
+
+        label {
+            float: left;
+            clear: left;
+            margin: 11px 20px 0 0;
+            width: 80px;
+            text-align: right;
+            font-size: 16px;
+            text-shadow: 0 1px 0 #f2f2f2;
+        }
+
+        input {
+            float: left;
+            height: 35px;
+            padding: 5px 20px 0 5px;
+            margin: 0 0 20px 0;
+            -webkit-border-radius: 6px;
+            -webkit-box-shadow: inset 0 1px 3px rgba(0, 0, 0, .6);
+            font-size: 14px;
+            text-shadow: 0 -1 0 #334f71;
+            -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
+        }
+
+        input::-webkit-input-placeholder {
+            color: #a1b2c3;
+            text-shadow: 0px -1px 0px #38506b;
+        }
+        
+        .submit {
+            height: 40px;
+            width: 150px;
+            line-height: 40px;
+            text-align: center;
+            color: #fff;
+            font-size: 16px;
+            -webkit-box-shadow: 0 0 5px #999;
+            background:-webkit-gradient(linear, left top, left bottom, color-stop(0%,#28a3ac), color-stop(100%,#007c85));
+            margin: 0 0 15px 100px;
+            -webkit-border-radius: 5px;
+        }
+
+        .register {
+            margin-top: 20px;
+            text-align: center;
+            display: block;
+            font-size: 14px;
+        }
+    </style>
+    <script type="text/javascript">
+	
+    	//登录函数
+        function login() {
+            //获取用户和密码
+    		var userName = ($("#name").val() || "").trim(),
+                password = ($("#password").val() || "").trim();
+            
+            //判断用户么是否为空
+            if (!userName) {
+                //对话框
+            	$.alert("请填写用户名");
+                return;
+            }
+            
+            //判断密码是否为空
+            if (!password) {
+                $.alert("密码不能为空");
+                return;
+            }
+            
+            //打开进度条
+            var waiting = $.openWaiting("正在登录，请稍候...");
+            
+            //登录函数
+            $.login(userName, password, function(ret) {
+            	//取消进度条
+                waiting.hide();
+                if (ret != "0") {
+                    $.alert("登录失败，请检查您的用户名和密码。");
+                } else {
+                	//保存到数据库
+                    if (database){
+                        database.savePreference("last_login_user_name", userName);
+                    }
+                	
+                	//页面返回
+                    $.uiBack({
+                        "login": "success"
+                    });
+                }
+            });
+        }
+
+        var database;
+        //页面加载函数
+        $.pageLoaded(function() {
+            var tip = $.getContextData("tip") || "使用团800帐号登录,可享用和网站同步的团购收藏/已买标记功能。";
+            $("#tip").html('' + tip);
+           //确认按钮的点击事件
+            $(".submit").on("click", function() {
+            	//登录函数
+                login();
+            });
+           
+          //输入用户名
+            $("#name").on("keyup", function(e) {
+                if (e.keyCode == 13) {
+                    $("#password")[0].focus();
+                }
+            });
+          
+          //输入密码
+            $("#password").on("keyup", function(e) {
+                if (e.keyCode == 13) {
+                    login();
+                }
+            });
+            
+            //打开数据库
+            $.openDatabase(function(db) {
+                database = db;
+                db.getPreference("last_login_user_name", function(userName) {
+                    if (userName) {
+                        $("#name").val(userName);
+                    } else {
+                        $("#name").val("");
+                    }
+                });
+
+            });
+//            $("p.register").on("click", function() {
+//                $.openUrl("register.html", {
+//                    ui_title: "注 册"
+//                })
+//            });
+        });
+    </script>
+</head>
+<body>
+<div class="viewport">
+    <div class="scroll_wrapper">
+        <div class="scroller main">
+            <div class="div1">
+                <h3>小提示:</h3>
+                <div id="tip"></div>
+            </div>
+
+            <div class="div2">
+                <fieldset id="loginInfo">
+                    <label for="name">用户名:</label>
+                    <input type="text" id="name" placeholder="输入用户名">
+                    <label for="password">密码:</label>
+                    <input type="password" id="password" placeholder="输入密码">
+                </fieldset>
+                <div class="submit">
+                    登陆
+                </div>
+                <p class="register">欢迎您使用登录系统！</p>
+            </div>
+
+        </div>
+    </div>
+</div>
+</body>
+</html>

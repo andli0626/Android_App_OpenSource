@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:background="#FFF">
+    <LinearLayout android:background="@drawable/search_title_bg" android:orientation="horizontal" android:paddingLeft="10dp" android:paddingRight="5dp" android:gravity="center" android:layout_height="113dp" android:layout_width="fill_parent">
+		<ImageView android:scaleType="fitXY" android:src="@drawable/search_title_icon" android:layout_height="54dp" android:layout_width="67dp"/>
+		<TextView android:id="@+id/search_count_tv" android:textAppearance="?android:attr/textAppearanceLarge" android:paddingLeft="5dp" android:layout_weight="1" android:layout_height="wrap_content" android:layout_width="fill_parent" android:text="共0个搜索结果"/>
+		<ImageView android:scaleType="fitXY" android:id="@+id/search_goback" android:src="@drawable/goback" android:layout_height="89dp" android:layout_width="89dp"/>
+    </LinearLayout>
+	<LinearLayout android:layout_weight="3" android:orientation="vertical" android:layout_height="fill_parent" android:layout_width="fill_parent" android:id="@+id/index_layout_center" android:background="@drawable/index_body_bg">
+		<ListView android:id="@+id/search_listview" android:fadeScrollbars="true" android:background="#FFF" android:scrollingCache="false" android:fadingEdge="none" android:divider="@drawable/list_driver" android:layout_width="fill_parent" android:layout_height="fill_parent"/>
+	</LinearLayout>
+</LinearLayout>
+
+    	

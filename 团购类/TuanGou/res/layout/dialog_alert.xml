@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest android:versionCode="14" android:versionName="3.2" package="android.source.tuangou"
+  xmlns:android="http://schemas.android.com/apk/res/android">
+    <uses-sdk android:minSdkVersion="4" />
+    <uses-permission android:name="android.permission.CALL_PHONE" />
+    <uses-permission android:name="android.permission.SEND_SMS" />
+    <uses-permission android:name="android.permission.CAMERA" />
+    <uses-permission android:name="android.permission.VIBRATE" />
+    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
+    <uses-permission android:name="android.permission.ACCESS_LOCATION_EXTRA_COMMANDS" />
+    <uses-permission android:name="android.permission.READ_PHONE_STATE" />
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.RECORD_AUDIO" />
+    <uses-permission android:name="android.permission.MODIFY_AUDIO_SETTINGS" />
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+    <uses-permission android:name="android.permission.READ_LOGS" />
+    <application android:label="@string/app_name" android:icon="@drawable/icon" android:name="androiid.source.tuangou.framework.Application">
+        <activity android:theme="@style/CustomTheme" android:label="@string/app_name" android:name=".LaunchActivity" android:configChanges="keyboardHidden|orientation">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+        
+        <activity android:label="@string/app_name" android:name=".MainActivity" android:configChanges="keyboardHidden|orientation" />
+        <activity android:label="@string/app_name" android:name=".ActivityContainer" android:configChanges="keyboardHidden|orientation" />
+        <activity android:label="@string/app_name" android:name="androiid.source.tuangou.HeaderWebActivity" android:configChanges="keyboardHidden|orientation" />
+        <meta-data android:name="UMENG_APPKEY" android:value="4e0d35fa431fe34bc1000150" />
+    </application>
+</manifest>

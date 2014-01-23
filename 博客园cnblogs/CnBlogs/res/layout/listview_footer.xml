@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="wrap_content"
+    android:background="@android:drawable/list_selector_background"
+    android:gravity="center"
+    android:padding="10dip" >
+
+    <ProgressBar
+        android:id="@+id/list_footer_progress"
+        style="?android:attr/progressBarStyleSmall"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerVertical="true"
+        android:layout_marginRight="10dip"
+        android:indeterminate="true"
+        android:visibility="gone" >
+    </ProgressBar>
+
+    <TextView
+        android:id="@+id/tvFooterMore"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:text="点击此处，加载更多..."
+        android:textColor="@color/black"
+        android:textSize="18sp" >
+    </TextView>
+
+</LinearLayout>

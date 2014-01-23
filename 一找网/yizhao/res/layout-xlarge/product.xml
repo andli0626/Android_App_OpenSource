@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:background="#EEE">
+    
+    <RelativeLayout android:background="@drawable/search_title_bg" android:orientation="horizontal" android:paddingLeft="10dp" android:gravity="center" android:layout_height="113dp" android:layout_width="fill_parent">
+		<ImageView android:src="@drawable/product_title_icon" android:scaleType="fitXY" android:layout_height="62dp" android:layout_width="67dp"/>
+		<TextView android:gravity="center" android:textAppearance="?android:attr/textAppearanceLarge" android:layout_height="wrap_content" android:layout_width="fill_parent" android:text="商品分类"/>
+    </RelativeLayout>
+   
+    <LinearLayout android:orientation="vertical" android:layout_width="fill_parent" android:layout_height="fill_parent">
+    
+		<LinearLayout android:background="@drawable/product_selec" android:id="@+id/product_1" android:orientation="horizontal" android:padding="10dp" android:gravity="center" android:layout_height="wrap_content" android:layout_width="fill_parent">
+			<ImageView android:src="@drawable/pd_1" android:scaleType="fitXY" android:layout_height="98dp" android:layout_width="98dp"/>
+			<TextView style="@style/theme_fontcolor_blake" android:paddingLeft="5dp" android:layout_weight="1" android:textAppearance="?android:attr/textAppearanceLarge" android:layout_height="wrap_content" android:layout_width="fill_parent" android:text="美容化妆"/>
+			<ImageView android:src="@drawable/index_body_jt" android:layout_height="32dp" android:layout_width="44dp"/>
+	    </LinearLayout>
+	    
+	    <View android:layout_width="fill_parent" style="@style/style_line"/>
+		
+	    <LinearLayout android:background="@drawable/product_selec" android:id="@+id/product_2" android:orientation="horizontal" android:padding="10dp" android:gravity="center" android:layout_height="wrap_content" android:layout_width="fill_parent">
+			<ImageView android:src="@drawable/pd_2" android:scaleType="fitXY" android:layout_height="98dp" android:layout_width="98dp"/>
+			<TextView style="@style/theme_fontcolor_blake" android:paddingLeft="5dp" android:layout_weight="1" android:textAppearance="?android:attr/textAppearanceLarge" android:layout_height="wrap_content" android:layout_width="fill_parent" android:text="电脑数码"/>
+			<ImageView android:src="@drawable/index_body_jt" android:layout_height="32dp" android:layout_width="44dp"/>
+	    </LinearLayout>
+	    
+	    <View android:layout_width="fill_parent" style="@style/style_line"/>
+		
+	    <LinearLayout android:background="@drawable/product_selec" android:id="@+id/product_3" android:orientation="horizontal" android:padding="10dp" android:gravity="center" android:layout_height="wrap_content" android:layout_width="fill_parent">
+			<ImageView android:src="@drawable/pd_3" android:scaleType="fitXY" android:layout_height="98dp" android:layout_width="98dp"/>
+			<TextView style="@style/theme_fontcolor_blake" android:paddingLeft="5dp" android:layout_weight="1" android:textAppearance="?android:attr/textAppearanceLarge" android:layout_height="wrap_content" android:layout_width="fill_parent" android:text="家电"/>
+			<ImageView android:src="@drawable/index_body_jt" android:layout_height="32dp" android:layout_width="44dp"/>
+	    </LinearLayout>
+	    
+	    <View android:layout_width="fill_parent" style="@style/style_line"/>
+		
+	    <LinearLayout android:background="@drawable/product_selec" android:id="@+id/product_4" android:orientation="horizontal" android:padding="10dp" android:gravity="center" android:layout_height="wrap_content" android:layout_width="fill_parent">
+			<ImageView android:src="@drawable/pd_4" android:scaleType="fitXY" android:layout_height="98dp" android:layout_width="98dp"/>
+			<TextView style="@style/theme_fontcolor_blake" android:paddingLeft="5dp" android:layout_weight="1" android:textAppearance="?android:attr/textAppearanceLarge" android:layout_height="wrap_content" android:layout_width="fill_parent" android:text="母婴用品"/>
+			<ImageView android:src="@drawable/index_body_jt" android:layout_height="32dp" android:layout_width="44dp"/>
+	    </LinearLayout>
+	    
+	    <View android:layout_width="fill_parent" style="@style/style_line"/>
+		
+	    <LinearLayout android:background="@drawable/product_selec" android:id="@+id/product_5" android:orientation="horizontal" android:padding="10dp" android:gravity="center" android:layout_height="wrap_content" android:layout_width="fill_parent">
+			<ImageView android:src="@drawable/pd_5" android:scaleType="fitXY" android:layout_height="98dp" android:layout_width="98dp"/>
+			<TextView style="@style/theme_fontcolor_blake" android:paddingLeft="5dp" android:layout_weight="1" android:textAppearance="?android:attr/textAppearanceLarge" android:layout_height="wrap_content" android:layout_width="fill_parent" android:text="图书"/>
+			<ImageView android:src="@drawable/index_body_jt" android:layout_height="32dp" android:layout_width="44dp"/>
+	    </LinearLayout>
+	    
+	    <View android:layout_width="fill_parent" style="@style/style_line"/>
+    
+    </LinearLayout>
+    
+</LinearLayout>
+
+
+	
+
+    	

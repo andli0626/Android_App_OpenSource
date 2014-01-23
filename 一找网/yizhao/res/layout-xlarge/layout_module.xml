@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent" android:orientation="vertical"
+    android:layout_height="fill_parent"
+    android:background="#FFF">
+    <!-- 中间动态加载View -->
+    
+	<ScrollView android:id="@+id/container_index" android:measureAllChildren="true" android:fillViewport="true" android:layout_weight="1" android:layout_width="fill_parent" android:layout_height="fill_parent"/>
+    <LinearLayout android:background="@drawable/menu_bg" android:padding="2dp" android:orientation="horizontal" android:gravity="center" android:layout_height="wrap_content" android:layout_width="fill_parent">
+		<LinearLayout android:id="@+id/menu_ss" android:background="@drawable/menu_change" android:orientation="vertical" android:gravity="center" android:layout_height="129dp" android:layout_width="175dp" android:layout_marginLeft="5dp" android:layout_marginRight="5dp">
+			<ImageView android:scaleType="fitXY" android:background="@drawable/menu_1" android:layout_height="65dp" android:layout_width="65dp"/>
+			<TextView style="@style/theme_fontcolor_white" android:textAppearance="?android:attr/textAppearanceLarge" android:gravity="center" android:text="搜索" android:id="@+id/cx_text" android:layout_width="fill_parent" android:layout_height="wrap_content"/>
+		</LinearLayout>
+		<LinearLayout android:id="@+id/menu_fl" android:background="@drawable/menu_def" android:orientation="vertical" android:gravity="center" android:layout_height="129dp" android:layout_width="175dp" android:layout_marginLeft="5dp" android:layout_marginRight="5dp">
+			<ImageView android:scaleType="fitXY" android:background="@drawable/menu_2" android:layout_height="65dp" android:layout_width="65dp"/>
+			<TextView style="@style/theme_fontcolor_white" android:textAppearance="?android:attr/textAppearanceLarge" android:gravity="center" android:text="分类" android:id="@+id/cx_text" android:layout_width="fill_parent" android:layout_height="wrap_content"/>
+		</LinearLayout>
+		<LinearLayout android:id="@+id/menu_sc" android:background="@drawable/menu_def" android:orientation="vertical" android:gravity="center" android:layout_height="129dp" android:layout_width="175dp" android:layout_marginLeft="5dp" android:layout_marginRight="5dp">
+			<ImageView android:scaleType="fitXY" android:background="@drawable/menu_3"  android:layout_height="65dp" android:layout_width="65dp"/>
+			<TextView style="@style/theme_fontcolor_white" android:textAppearance="?android:attr/textAppearanceLarge" android:gravity="center" android:text="收藏" android:id="@+id/cx_text" android:layout_width="fill_parent" android:layout_height="wrap_content"/>
+		</LinearLayout>
+	</LinearLayout>
+</LinearLayout>

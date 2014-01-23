@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string-array name="search_modes">
+
+        <!-- <item>Album</item> -->
+        <item>Artysta</item>
+        <item>Tag</item>
+        <item>Listy Odtwarzania Użytkownika</item>
+        <item>Ulubione Albumy Użytkownika</item>
+    </string-array>
+    <string-array name="radio_modes">
+        <item>Ostatnio słuchane</item>
+        <item>Polecane</item>
+    </string-array>
+    <string-array name="download_modes">
+        <item>Wszystkie</item>
+        <item>Zakończone</item>
+        <item>Kolejka</item>
+    </string-array>
+
+</resources>

@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android" android:orientation="vertical" android:id="@+id/index_center_layout" android:layout_height="wrap_content" android:layout_width="fill_parent">
+	<TextView android:padding="5dp" android:textColor="#000" android:ellipsize="end" android:singleLine="true" android:textAppearance="?android:attr/textAppearanceMedium" android:text="" android:id="@+id/name" android:gravity="center" android:layout_width="fill_parent" android:layout_height="wrap_content"/>
+	<LinearLayout android:layout_below="@id/name" android:gravity="center" android:layout_height="wrap_content" android:layout_width="fill_parent" android:paddingLeft="10dp" android:paddingRight="10dp" android:paddingBottom="10dp">
+		<LinearLayout android:background="@drawable/index_body_bg2" android:orientation="vertical" android:gravity="center"  android:layout_width="365dp" android:layout_height="365dp">
+			<ImageView android:id="@+id/coverimage" android:scaleType="fitXY" android:adjustViewBounds="true" android:src="@drawable/yizhao" android:layout_width="330dp" android:layout_height="330dp"/>
+		</LinearLayout>
+		<LinearLayout android:padding="8dip" android:layout_weight="1" android:gravity="center" android:orientation="vertical" android:layout_width="fill_parent" android:layout_height="wrap_content">
+			<LinearLayout android:orientation="horizontal" android:layout_width="fill_parent" android:layout_height="wrap_content">
+				<TextView android:text="最高价:" android:gravity="left" android:textAppearance="?android:attr/textAppearanceLarge" android:layout_width="wrap_content" android:layout_height="wrap_content"/>
+				<TextView android:id="@+id/highprice" android:textAppearance="?android:attr/textAppearanceLarge" style="@style/theme_fontcolor_red" android:text="6500元" android:gravity="left" android:layout_width="wrap_content" android:layout_height="wrap_content"/>
+			</LinearLayout>
+			<LinearLayout android:orientation="horizontal" android:layout_width="fill_parent" android:layout_height="wrap_content">
+				<TextView android:text="最低价:" android:textAppearance="?android:attr/textAppearanceLarge" android:gravity="left" android:layout_width="wrap_content" android:layout_height="wrap_content"/>
+				<TextView android:id="@+id/lowprice" android:textAppearance="?android:attr/textAppearanceLarge" style="@style/theme_fontcolor_red" android:text="6500元" android:gravity="left" android:layout_width="wrap_content" android:layout_height="wrap_content"/>
+			</LinearLayout>
+			<LinearLayout android:orientation="horizontal" android:layout_width="fill_parent" android:layout_height="wrap_content">
+				<TextView android:id="@+id/shops" android:textAppearance="?android:attr/textAppearanceLarge" style="@style/theme_fontcolor_red" android:text="650家" android:gravity="left" android:layout_width="wrap_content" android:layout_height="wrap_content"/>
+				<TextView android:text="有售" android:textAppearance="?android:attr/textAppearanceLarge" android:gravity="left" android:layout_width="wrap_content" android:layout_height="wrap_content"/>
+			</LinearLayout>
+			<LinearLayout android:orientation="horizontal" android:layout_width="fill_parent" android:layout_height="wrap_content">
+				<TextView android:id="@+id/reviews" android:textAppearance="?android:attr/textAppearanceLarge" style="@style/theme_fontcolor_red" android:text="650人" android:gravity="left" android:layout_width="wrap_content" android:layout_height="wrap_content"/>
+				<TextView android:text="发表评论" android:textAppearance="?android:attr/textAppearanceLarge" android:gravity="left" android:layout_width="wrap_content" android:layout_height="wrap_content"/>
+			</LinearLayout>
+		</LinearLayout>
+	</LinearLayout>
+</RelativeLayout>

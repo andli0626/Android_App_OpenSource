@@ -1,0 +1,198 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml" lang="zh-CN" xml:lang="zh-CN">
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+    <title>CityList</title>
+    <link type="text/css" rel="stylesheet" href="base.css"/>
+    <script type="text/javascript" src="tMobile.js"></script>
+    <script type="text/javascript" src="config.js"></script>
+    <script type="text/javascript" src="bridge.js"></script>
+    <style type="text/css">
+        .main {
+            padding: 70px 10px 10px 10px;
+        }
+        .s_container {
+            height: 60px;
+            position: absolute;
+            width: 100%;
+            z-index: 1;
+        }
+
+        .search_box {
+            height: 40px;
+            top: 10px;
+            margin: 0 10px;
+            -webkit-border-radius: 18px;
+        }
+
+        input.search {
+            float: left;
+            height: 32px;
+            margin: 4px 10px;
+            -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
+            border: none;
+            font-size: 16px;
+        }
+
+        .search_box .s_icon {
+            position: absolute;
+            background-position: 0 0;
+            height: 30px;
+            width: 30px;
+            right: 10px;
+            top: 5px;
+        }
+
+        .main .city {
+            height: 50px;
+            line-height: 50px;
+            font-size: 16px;
+            font-weight: bold;
+            padding-left: 10px;
+        }
+
+        .main .city:hover {
+            background-image: -webkit-gradient(linear, 0 100%, 0 0, color-stop(0, #39b5be), color-stop(1, #4fcbd4));
+
+        }
+
+        #city_hot {
+            display: block;
+            height: 24px;
+            font-size: 16px;
+            color: #666;
+            line-height: 24px;
+        }
+    </style>
+    <script type="text/html" id="city_tpl">
+        <div class="bar city"><[=name]></div>
+    </script>
+    
+    <script type="text/javascript">
+    	//应用city函数
+        function applyCityList(list) {
+            $(".content1").tmpl({
+                tplContainerId: "city_tpl",
+                data: list,
+                rendered: function(dom, context) {
+                    var city = context.data;
+                    //选择了相应城市
+                    dom.filter("div").on("click", function() {
+                        $.openDatabase(function(db) {
+                        	//保存当前city
+                        	$.print(city.id);
+                        	
+                            db.savePreference("current_city_id", city.id);
+                        	//打开对话框，进行提示
+                            $.openDialog({
+                                title: "选择城市",
+                                content: "<div class='alert_msg'>您的已经设置所在城市为：" + city.name + "。</div>",
+                                buttons: [{
+                                    text: "确 定",
+                                    onclick: function() {
+                                    	//返回原主界面
+                                        $.uiBack({"city": city});
+                                    }
+                                }]
+                            }).show();
+                        });
+                    });
+                }
+            });
+        }
+        
+        //页面加载函数
+        $.pageLoaded(function() {
+        	
+        	//获取city列表
+            $.getCityList(function(list) {
+            	//city数组
+                var city_hot = [
+                    {"pinyin":"beijing","name":"\u5317\u4eac","id":"1"},
+                    {"pinyin":"shanghai","name":"\u4e0a\u6d77","id":"2"},
+                    {"pinyin":"xian","name":"\u897f\u5b89","id":"3"},
+                    {"pinyin":"shenzhen","name":"\u6df1\u5733","id":"4"},
+                    {"pinyin":"guangzhou","name":"\u5e7f\u5dde","id":"5"},
+                    {"pinyin":"tianjin","name":"\u5929\u6d25","id":"7"},
+                    {"pinyin":"nanjing","name":"\u5357\u4eac","id":"8"},
+                    {"pinyin":"wuhan","name":"\u6b66\u6c49","id":"9"},
+                    {"pinyin":"hangzhou","name":"\u676d\u5dde","id":"10"},
+                    {"pinyin":"chengdu","name":"\u6210\u90fd","id":"13"},
+                    {"pinyin":"changsha","name":"\u957f\u6c99","id":"19"},
+                    {"pinyin":"zhengzhou","name":"\u90d1\u5dde","id":"25"}
+                ];
+            	//应用city数组
+                applyCityList(city_hot);
+            	
+                $(".scroller").scroller();
+                // search input 搜索函数
+                $(".search_box input").on("keyup", function(e) {
+                    document.getElementById('city_hot').style.display = 'none';
+                    //判断是否按了确认键
+                    if (e.keyCode == 13) {
+                    	//搜索函数
+                        search();
+                    }
+                });
+                
+               //搜索点击函数
+                $(".search_box .p_icon").on("click", function() {
+                    document.getElementById('city_hot').style.display = 'none';
+                    //搜索函数
+                    search();
+                });
+
+                //搜索函数
+                function search() {
+                    var keyword = $(".search_box input").val().trim(),
+                        keys = keyword.split(''), i, l = keys.length, lc = list.length, c, sub, j, sk, add;
+                    
+                    if (l) {
+                        sub = [];
+                        for (i = 0; i < lc; i++) {
+                            c = list[i];
+                            add = true;
+                            if (!c.name.startsWith(keys[0].toLowerCase()) && !c.pinyin.startsWith(keys[0].toLowerCase())) {
+                                continue;
+                            }
+                            for (j = 0; j < l; j++) {
+                                sk = keys[j].toLowerCase();
+                                if (c.name.indexOf(sk) < 0 && c.pinyin.indexOf(sk) < 0) {
+                                    add = false;
+                                    break;
+                                }
+                            }
+                            if (add)
+                                sub.push(c);
+                        }
+                        applyCityList(sub);
+                    } else {
+                        applyCityList(city_hot);
+                    }
+                }
+            });
+        });
+    </script>
+</head>
+<body>
+<div class="viewport">
+    <div class="flex_col">
+        <div class="bar s_container">
+            <div class="search_box filter_box">
+                <input class="search" type="text" placeholder="请输入您所在的城市"/>
+                <div class="p_icon s_icon"></div>
+            </div>
+        </div>
+        <div class="scroll_wrapper">
+            <div class="scroller main">
+                 <p id="city_hot">热门城市:</p>
+                <div class="content1"></div>
+            </div>
+        </div>
+    </div>
+</div>
+</body>
+</html>

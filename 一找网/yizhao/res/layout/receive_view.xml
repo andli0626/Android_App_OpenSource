@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android" android:gravity="center" android:orientation="vertical" android:background="#FFF" android:layout_height="wrap_content" android:layout_width="fill_parent">
+	<LinearLayout android:orientation="horizontal" android:layout_width="fill_parent" android:layout_height="wrap_content">
+		<TextView android:id="@+id/authName" android:text="张三" android:gravity="left" android:layout_width="wrap_content" android:layout_height="wrap_content" android:layout_marginRight="5dp"/>
+		<TextView android:id="@+id/receiveTime" android:gravity="left" android:text="[2011-07-01 19:33]" android:layout_width="fill_parent" android:layout_height="wrap_content"/>
+	</LinearLayout>
+	<LinearLayout android:orientation="horizontal" android:layout_width="fill_parent" android:layout_height="wrap_content">
+		<TextView android:text="来源于：" android:gravity="left" android:layout_width="wrap_content" android:layout_height="wrap_content"/>
+		<TextView android:id="@+id/from" android:text="一找网" android:gravity="left" android:layout_width="wrap_content" android:layout_height="wrap_content"/>
+	</LinearLayout>
+	<TextView android:id="@+id/content" style="@style/theme_fontcolor_blake" android:text="" android:gravity="left" android:layout_width="fill_parent" android:layout_height="wrap_content"/>
+</LinearLayout>

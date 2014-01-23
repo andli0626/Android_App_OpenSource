@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:background="#FFF">    
+    
+    <LinearLayout android:background="@drawable/search_title_bg" android:orientation="horizontal" android:paddingLeft="10dp" android:gravity="center" android:layout_height="46dp" android:layout_width="fill_parent">
+		<ImageView android:scaleType="fitXY" android:id="@+id/detail_goback" android:src="@drawable/goback" android:layout_height="39dp" android:layout_width="39dp"/>
+		<TextView  android:id="@+id/detail_title" android:layout_weight="1" android:gravity="center" android:ellipsize="end" android:singleLine="true" android:layout_centerInParent="true" android:textAppearance="?android:attr/textAppearanceMedium" android:layout_height="wrap_content" android:layout_width="fill_parent" android:text="商品详情"/>
+    </LinearLayout>
+    
+    <LinearLayout android:orientation="horizontal" android:layout_marginTop="5dp" android:layout_marginBottom="3dp" android:paddingLeft="5dp" android:background="@drawable/detail_tab_bg" android:gravity="bottom" android:layout_height="28dp" android:layout_width="fill_parent">
+    	<TextView android:id="@+id/detail_tab1" android:layout_marginRight="4dp" style="@style/theme_fontcolor_blake" android:gravity="center" android:text="详情" android:textAppearance="?android:attr/textAppearanceMedium" android:background="@drawable/detail_tab_select" android:layout_width="80dp" android:layout_height="28dp"/>
+    	<TextView android:id="@+id/detail_tab2" android:layout_marginRight="4dp" style="@style/theme_fontcolor_blake" android:gravity="center" android:text="评论" android:textAppearance="?android:attr/textAppearanceMedium" android:background="@drawable/detail_tab_def" android:layout_width="80dp" android:layout_height="28dp"/>
+    	<TextView android:id="@+id/detail_tab3" android:layout_marginRight="4dp" style="@style/theme_fontcolor_blake" android:gravity="center" android:text="报价" android:textAppearance="?android:attr/textAppearanceMedium" android:background="@drawable/detail_tab_def" android:layout_width="80dp" android:layout_height="28dp"/>
+    </LinearLayout>
+    
+    <LinearLayout android:id="@+id/detailBody" android:layout_weight="1" android:layout_width="fill_parent" android:layout_height="fill_parent"/>
+</LinearLayout>
+
+    	
